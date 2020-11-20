@@ -1,0 +1,137 @@
+
+Summer 2003
+===========
+
+A number of interesting issues have come up so far during this project. First, you'll notice
+that for each object observed I provide a collection of facts about that object organized in a
+table. For example, the object's position or, in the case of double stars, the brightnesses of
+the component stars and their separations. Over the years I've often provided these kinds of
+facts in my write-ups because they give the observation context.
+
+For example if I say, "I found this double difficult due to the faintness of the secondary" a
+quick glance at the brightness and separation information helps one make sense of such a
+statement. However, the factual information about an object is available in standard catalogs
+and is the sort of information one would expect to find in a relational database. In fact, I
+downloaded the Washington Double Star catalog (containing information on almost 100,000 double
+stars) with the intent of eventually injecting it into a relational database and seeing what use
+I can make of it.
+
+Nevertheless I went ahead with defining markup for holding "catalog information" in my AOML
+documents. I did this for two reasons.
+
+1. An observer might want to exchange catalog information with another observer even if both
+   observers are using incompatible databases.
+
+2. A casual observer might not want to bother with a relational database; particularly if most
+   of the information recorded is document-like notes.
+
+Probably the most elegant solution in my case would be to use something like PHP to extract
+catalog information on each object from a database and merge it into the XML document. However,
+such a solution would still require XML markup to hold the data so that it could travel to the
+web browser in a properly structured form. (I suppose my PHP could drop a block of XHTML into
+the middle of my document as an alternative... but IE doesn't seem to like that). However, this
+solution requires the deployment of an entirely new layer of technology that many observers
+won't want to mess around with. Also I haven't tried using PHP in an XML document; I assume it's
+possible.
+
+The other complication with catalog information is that it's not all that static. For example,
+in the case of double stars many systems are binary and the separation information is thus a
+function of time. My current markup does not allow me to specify a relevant time for the catalog
+data---or even a reference for it. This clearly needs to be addressed.
+
+In contrast to pure catalog data, a serious observer might also be measuring catalog quantities.
+For example, serious double star observers measure their own separation information. Someone
+interested in tracking the orbit of a binary and, perhaps, computing orbital elements for
+themselves will want a place to put their own observations where they won't be confused with the
+information from a (possibly incorrect or out of date) catalog. I have yet to address this issue
+but I hope to do so fairly soon with variable stars.
+
+Finally I noticed a very rich interaction between XSLT and CSS. To use CSS effectively one needs
+to decide ahead of time what items need style control. When one writes the documents one needs
+to include appropriate "class" attributes on those items so that they can be identified in the
+style sheet. What this means is that if the document author decides afterwards to assert style
+control over a new item. It is possible (likely?) that every document will need to be edited to
+include a new class attribute in the appropriate places. It is true that once the class
+attribute is in place, the style can be adjusted by modifying just the style sheet. However,
+with CSS it is desirable to get all the classes defined before any documents are written. That's
+not always feasible.
+
+However, if one is generating the documents from XML using XSLT the class attributes can be
+added during the XSLT styling process---provided that the items in question are separately
+marked up in the XML. To add a new class globally one needs only to modify the XSLT style sheet.
+To define the look of that class one needs only to modify the CSS style sheet.
+
+Of course this doesn't work as well if the XML markup doesn't break out the items one wants to
+assert style control over. However, it could be argued that the XML markup is deficient in that
+case. I've already encounted this problem in my <aoml:notes> element. Right now <aoml:notes> can
+contain any markup from XHTML. This is nice and flexible. It's also why I end up with documents
+containing "islands" of XHTML in the middle of my HTML. However, I'd like to add AOML
+document-like markup to my notes. Perhaps something like this
+
+<aoml:notes>
+  <xhtml:p>Tonight I observed in the region of
+  <aoml:constellation>Lyr</aoml:constellation>.
+  I looked at several small clusters and a few
+  doubles. It was a good night.</xhtml:p>
+</aoml:notes>
+
+XHTML does not contain a <constellation> element but I might want to assert style control over
+the names of constellations when I format my observations. I might also want to search for all
+references to a certain constellation or index my observations by constellation. Hence it seems
+like I should have XML markup to identify such names. However, mixing markup from multiple
+namespaces in the same element like this creates problems for the schema design and validation.
+These problems have a resolution, I think. I've seem some material discussing such matters. I
+just need more time to digest it.
+
+In a different direction I've also started working on a Java program that will go over all my
+observations and generate an HTML document that indexes all the double stars I've observed. It
+will work, of course, by yanking information on each double out of the <object> element in each
+of my observations. It would not be possible to pull such information reliably from a strict
+HTML document and thus this is a good reason for using XML.
+
+Of course I could also record facts about my observations in a relational database and then use
+a database query to generate the index (imagine PHP getting the data from the database and then
+formatting it for presentation in HTML). My Java program will need to process every document
+each time I add a new observation so that it can rebuild the index. That's relatively inelegant
+and has scalability problems. On the other hand, I can get my index this way without messing
+around with a relational database and the index can be served without doing a database query
+each time. Ultimately I hope to generate indicies in a similar way for all my observation types.
+
+
+Spring 2003
+===========
+
+What follows is a list of topics for potential inclusion in AOML. This list was taken from a
+list developed for the "XML for Astronomy" project on Sourceforge.
+
+ 1) Structure
+ 2) Root elements
+ 3) Object identification
+ 4) Positions of objects
+ 5) Time
+ 6) Location of observing site
+ 7) Observing conditions
+ 8) Instrument information
+ 9) Common observation elements
+10) Specific (for object type) observation elements
+11) References to external information sources
+12) Document-like markup for use in <notes>
+
+What follows is a description of the intended audience for AOML. This description was originally
+developed for the "XML for Astronomy" project on Sourceforge.
+
+1. Individual novice to intermediate observers interested in recording informal observations in
+   way that makes them easier to format or search.
+
+2. Individual intermediate to advanced observers interested in recording formal, high quality,
+   scientifically significant data. Such observers might also be using (or want to be using) a
+   relational database as well. AOML should have the ability to play happily with such systems.
+
+3. Groups (clubs, teams of observers, etc) interested in recording observations made by the
+   group under various conditions.
+
+4. Individuals or groups interested in exchanging observations or object information to build a
+   common store of such information. These people may want to merge observations from different
+   sources into a single document or exchange "catalog data" between incompatable databases.
+
+5. Not professionals.
