@@ -74,7 +74,7 @@ To Do:
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="type" type="typeType" use="required"/>
+    <xs:attribute name="type" type="notesType" use="required"/>
     <xs:attribute name="eventID" type="xs:ID" use="required"/>
   </xs:complexType>
 

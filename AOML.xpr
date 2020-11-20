@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="22.1">
+    <meta>
+        <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
+        <options>
+            <serialized version="22.1" xml:space="preserve">
+                <serializableOrderedMap>
+                    <entry>
+                        <String>enable.project.master.files.support</String>
+                        <Boolean>true</Boolean>
+                    </entry>
+                </serializableOrderedMap>
+            </serialized>
+        </options>
+    </meta>
+    <projectTree name="AOML.xpr">
+        <folder masterFiles="true" name="Master Files">
+            <file name="AOML.xsd"/>
+        </folder>
+        <file name="AEML.xsd"/>
+        <file name="AEML.xsl"/>
+        <file name="AOML.ent"/>
+        <file name="AOML.xsd"/>
+        <file name="AOML.xsl"/>
+        <file name="LibObject.xsd"/>
+        <file name="LibSky.xsd"/>
+        <file name="LibType.xsd"/>
+        <file name="sample-AE.xml"/>
+        <file name="sample-AO.xml"/>
+        <file name="sample-instrument.xml"/>
+        <file name="sample-sky.xml"/>
+        <file name="sky.xsl"/>
+    </projectTree>
+</project>
