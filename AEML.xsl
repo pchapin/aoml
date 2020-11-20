@@ -2,7 +2,7 @@
 
 <!--
      FILE        : AEML.xsl
-     LAST REVISED: 2008-08-19
+     LAST REVISED: 2020-11-19
      AUTHOR      : Peter C. Chapin
 
 This file contains a stylesheet suitable for converting AEML into HTML. 
@@ -13,7 +13,7 @@ To Do:
 
 -->
 
-<xsl:stylesheet version="1.0" xmlns:aeml="http://vortex.cis.vtc.edu/xml/AEML_0.0"
+<xsl:stylesheet version="1.0" xmlns:aeml="http://www.pchapin.org/XML/AEML"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">

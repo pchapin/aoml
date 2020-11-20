@@ -39,7 +39,7 @@
 ]>
 
 <!-- FILE    : AOML.xsl
-     AUTHOR  : (C) Copyright 2013 by Peter C. Chapin
+     AUTHOR  : (C) Copyright 2020 by Peter C. Chapin
      SUBJECT : Style sheet to convert astronomical observations into HTML.
      
 To Do:
@@ -51,7 +51,7 @@ To Do:
 
 -->
 
-<xsl:stylesheet version="1.0" xmlns:aoml="http://vortex.cis.vtc.edu/xml/AOML_0.0"
+<xsl:stylesheet version="1.0" xmlns:aoml="http://www.pchapin.org/XML/AOML"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">

@@ -39,10 +39,10 @@
 
 <?xml-stylesheet type="text/xsl" href="AOML.xsl"?>
 
-<observation-set xmlns="http://vortex.cis.vtc.edu/xml/AOML_0.0"
+<observation-set xmlns="http://www.pchapin.org/XML/AOML"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://vortex.cis.vtc.edu/xml/AOML_0.0 AOML.xsd">
+  xsi:schemaLocation="http://www.pchapin.org/XML/AOML AOML.xsd">
 
   <datetimerange>
     <start resolution="PT10M">

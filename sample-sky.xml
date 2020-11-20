@@ -4,10 +4,10 @@
      AUTHOR      : (C) Copyright by Peter C. Chapin
      SUBJECT     : Sky condition observations for ...
 -->
-<observation-set xmlns="http://vortex.cis.vtc.edu/xml/AOML_0.0"
+<observation-set xmlns="http://www.pchapin.org/XML/AOML"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://vortex.cis.vtc.edu/xml/AOML_0.0 AOML.xsd">
+  xsi:schemaLocation="http://www.pchapin.org/XML/AOML AOML.xsd">
 
   <!--
     Location, observer, datetime, and notes information immediately inside an observation-set is

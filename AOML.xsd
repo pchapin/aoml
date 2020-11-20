@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- FILE    : AOML.xsd
-     AUTHOR  : (C) Copyright 2011 by Peter C. Chapin
+     AUTHOR  : (C) Copyright 2020 by Peter C. Chapin
      SUBJECT : XML schema for describing amateur astronomical observations.
 
 This markup is intended for use by amateur astronomers who are interested in recording their
@@ -17,8 +17,8 @@ TO DO
 + Multitudes of other things.
 -->
 
-<xs:schema targetNamespace="http://vortex.cis.vtc.edu/xml/AOML_0.0"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://vortex.cis.vtc.edu/xml/AOML_0.0"
+<xs:schema targetNamespace="http://www.pchapin.org/XML/AOML"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.pchapin.org/XML/AOML"
   elementFormDefault="qualified" xml:lang="en-US">
 
   <xs:annotation>

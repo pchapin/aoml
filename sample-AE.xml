@@ -5,10 +5,10 @@
      AUTHOR : Peter C. Chapin
      SUBJECT: Astronomical Events for July 2003 -->
 
-<eventlist xmlns="http://vortex.cis.vtc.edu/xml/AEML_0.0"
+<eventlist xmlns="http://www.pchapin.org/XML/AEML"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://vortex.cis.vtc.edu/xml/AEML_0.0 AEML.xsd">
+  xsi:schemaLocation="http://www.pchapin.org/XML/AEML AEML.xsd">
 
   <title>Astronomical Events for July 2003</title>
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 
 <!-- FILE        : sky.xsl
-     LAST REVISED: 2008-10-03
-     AUTHOR      : (C) Copyright 2008 by Peter C. Chapin
+     LAST REVISED: 2020-11-19
+     AUTHOR      : (C) Copyright 2020 by Peter C. Chapin
      SUBJECT     : Style sheet to convert sky.xsd into an HTML table.
      
 To Do:
@@ -17,7 +17,7 @@ To Do:
   respect to limiting magnitude and seeing, etc).
 -->
 
-<xsl:stylesheet version="1.0" xmlns:aoml="http://vortex.cis.vtc.edu/xml/AOML_0.0"
+<xsl:stylesheet version="1.0" xmlns:aoml="http://www.pchapin.org/XML/AOML"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
