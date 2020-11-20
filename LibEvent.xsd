@@ -1,27 +1,20 @@
 <?xml version="1.0"?>
-
-<!-- FILE        : AEML.xsd
+<!-- FILE        : LibEvent.xsd
      LAST REVISED: 2020-11-19
      AUTHOR      : (C) Copyright 2020 by Peter C. Chapin
 
-This file contains the schema definition for Astronomical Event Markup
-Language.
+This file contains the schema definition for AOML event descriptions.
 
 To Do:
 
-+ Should this schema use the same namespace as AOML? Right now I'm
-  inclined to say "no" but I'm not sure.
-
-+ Need to enhance the way references are handled. AOML needs this too.
++ Need to enhance the way references are handled.
 
 -->
 
-<xs:schema targetNamespace="http://www.pchapin.or/XML/AEML"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.pchapin.org/XML/AEML"
-  elementFormDefault="qualified" xml:lang="en-US">
-
-  <xs:include schemaLocation="LibType.xsd"/>
-
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" elementFormDefault="qualified"
+  xml:lang="en-US">
+  
   <xs:element name="eventlist">
     <xs:annotation>
       <xs:documentation>An eventlist contains a list of events. The title child element
@@ -61,7 +54,7 @@ To Do:
     <xs:sequence>
       <xs:element name="summary" type="xs:string"/>
       <xs:element name="datetime" type="dateTimeType"/>
-      <xs:element name="notes" type="AEMLnotesType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="notes" type="eventNotesType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="ref" type="refType" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="level" default="all">
@@ -74,7 +67,7 @@ To Do:
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="type" type="notesType" use="required"/>
+    <xs:attribute name="type" type="typeType" use="required"/>
     <xs:attribute name="eventID" type="xs:ID" use="required"/>
   </xs:complexType>
 
@@ -101,7 +94,7 @@ To Do:
     </xs:simpleContent>
   </xs:complexType>
 
-  <xs:complexType name="AEMLnotesType">
+  <xs:complexType name="eventNotesType">
     <xs:annotation>
       <xs:documentation>This type is an extension of the notesType in the type library. It adds
         a level attribute so that notes can be flagged according to the level of the observer
@@ -129,8 +122,8 @@ To Do:
   <xs:simpleType name="typeType">
     <xs:annotation>
       <xs:documentation>This type is used to describe the kinds of events that can be described
-        with AEML. The names of the event types is intended to be somewhat similar to the names
-        of the object types in AOML.</xs:documentation>
+        with AOML. The names of the event types are intended to be somewhat similar to the names
+        of the object types.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
       <xs:enumeration value="comet"/>

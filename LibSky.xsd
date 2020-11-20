@@ -39,7 +39,7 @@ TO DO
       <xs:element ref="weather" minOccurs="0"/>
       <xs:element ref="limitingmag" minOccurs="0"/>
       <xs:element ref="seeing" minOccurs="0"/>
-      <xs:element name="notes" type="textType" minOccurs="0"/>
+      <xs:element name="notes" type="notesType" minOccurs="0"/>
       <xs:element name="rating" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
@@ -60,7 +60,7 @@ TO DO
         <xs:element ref="humidity" minOccurs="0"/>
         <xs:element ref="pressure" minOccurs="0"/>
         <xs:element ref="windspeed" minOccurs="0"/>
-        <xs:element name="notes" type="textType" minOccurs="0"/>
+        <xs:element name="notes" type="notesType" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -84,7 +84,7 @@ TO DO
             </xs:simpleContent>
           </xs:complexType>
         </xs:element>
-        <xs:element name="notes" type="textType" minOccurs="0"/>
+        <xs:element name="notes" type="notesType" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -98,7 +98,7 @@ TO DO
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="notes" type="textType"/>
+        <xs:element name="notes" type="notesType"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -121,7 +121,7 @@ TO DO
             </xs:simpleContent>
           </xs:complexType>
         </xs:element>
-        <xs:element name="notes" type="textType" minOccurs="0"/>
+        <xs:element name="notes" type="notesType" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -144,7 +144,7 @@ TO DO
             </xs:simpleContent>
           </xs:complexType>
         </xs:element>
-        <xs:element name="notes" type="textType" minOccurs="0"/>
+        <xs:element name="notes" type="notesType" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -167,7 +167,7 @@ TO DO
             </xs:simpleContent>
           </xs:complexType>
         </xs:element>
-        <xs:element name="notes" type="textType" minOccurs="0"/>
+        <xs:element name="notes" type="notesType" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -191,7 +191,7 @@ TO DO
             </xs:simpleContent>
           </xs:complexType>
         </xs:element>
-        <xs:element name="notes" type="textType" minOccurs="0"/>
+        <xs:element name="notes" type="notesType" minOccurs="0"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

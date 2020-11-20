@@ -31,6 +31,7 @@ TO DO
   <xs:include schemaLocation="LibType.xsd"/>
   <xs:include schemaLocation="LibSky.xsd"/>
   <xs:include schemaLocation="LibObject.xsd"/>
+  <xs:include schemaLocation="LibEvent.xsd"/>
 
   <!-- ROOT ELEMENTS -->
 
@@ -82,7 +83,7 @@ TO DO
       </xs:choice>
       <xs:sequence minOccurs="0" maxOccurs="unbounded">
         <xs:choice>
-          <xs:element name="text" type="textType"/>
+          <xs:element name="text" type="notesType"/>
           <xs:element name="observation" type="observationType"/>
           <xs:element name="observation-set" type="observationSetType"/>
         </xs:choice>
@@ -103,16 +104,6 @@ TO DO
         <xs:element name="entry" type="entryType"/>
         <xs:element name="entry-set" type="entrySetType"/>
       </xs:choice>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="textType">
-    <xs:annotation>
-      <xs:documentation>This type describes a collection of XHTML elements that can be used for
-        free formatted text descriptions.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="lax"/>
     </xs:sequence>
   </xs:complexType>
 

@@ -17,16 +17,16 @@
         <folder masterFiles="true" name="Master Files">
             <file name="AOML.xsd"/>
         </folder>
-        <file name="AEML.xsd"/>
-        <file name="AEML.xsl"/>
         <file name="AOML.ent"/>
         <file name="AOML.xsd"/>
         <file name="AOML.xsl"/>
+        <file name="events.xsl"/>
+        <file name="LibEvent.xsd"/>
         <file name="LibObject.xsd"/>
         <file name="LibSky.xsd"/>
         <file name="LibType.xsd"/>
-        <file name="sample-AE.xml"/>
         <file name="sample-AO.xml"/>
+        <file name="sample-events.xml"/>
         <file name="sample-instrument.xml"/>
         <file name="sample-sky.xml"/>
         <file name="sky.xsl"/>

@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 
 <!--
-     FILE        : AEML.xsl
+     FILE        : events.xsl
      LAST REVISED: 2020-11-19
      AUTHOR      : Peter C. Chapin
 
-This file contains a stylesheet suitable for converting AEML into HTML. 
+This file contains a stylesheet suitable for converting aoml into HTML. 
 
 To Do:
 
@@ -13,7 +13,7 @@ To Do:
 
 -->
 
-<xsl:stylesheet version="1.0" xmlns:aeml="http://www.pchapin.org/XML/AEML"
+<xsl:stylesheet version="1.0" xmlns:aoml="http://www.pchapin.org/XML/AOML"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -22,23 +22,23 @@ To Do:
   <xsl:output method="html"/>
 
   <!-- This top level template defines the general layout of the document. -->
-  <xsl:template match="aeml:eventlist">
+  <xsl:template match="aoml:eventlist">
     <html>
       <head>
         <title>
-          <xsl:value-of select="aeml:title"/>
+          <xsl:value-of select="aoml:title"/>
         </title>
         <link rel="stylesheet" href="default.css" type="text/css"/>
       </head>
       <body>
         <h1>
-          <xsl:value-of select="aeml:title"/>
+          <xsl:value-of select="aoml:title"/>
         </h1>
 
         <p>The markup used here distinguishes between events of particular interest to novices,
           intermediate observers, and advanced observers. In the context of an event individual
           notes are also associated, in some cases, with an experience level. For example, an
-          event that might be of interest to all may have some notes that would only be relevent
+          event that might be of interest to all may have some notes that would only be relevant
           to an advanced observer. These classifications have been made informally by me. This
           feature is experimental and subject to change or removal based on my experience with
           it.</p>
@@ -49,7 +49,7 @@ To Do:
           >Advanced</span><xsl:text> </xsl:text>All/Default/Informational</p>
 
         <hr/>
-        <xsl:if test="aeml:event[@type='moon']">
+        <xsl:if test="aoml:event[@type='moon']">
           <h2>Moon Events</h2>
           <table border="1">
             <tr>
@@ -58,10 +58,10 @@ To Do:
               <th>Time</th>
               <th>Notes</th>
             </tr>
-            <xsl:apply-templates select="aeml:event[@type='moon']"/>
+            <xsl:apply-templates select="aoml:event[@type='moon']"/>
           </table>
         </xsl:if>
-        <xsl:if test="aeml:event[@type='planet']">
+        <xsl:if test="aoml:event[@type='planet']">
           <h2>Planet Events</h2>
           <table border="1">
             <tr>
@@ -70,10 +70,10 @@ To Do:
               <th>Time</th>
               <th>Notes</th>
             </tr>
-            <xsl:apply-templates select="aeml:event[@type='planet']"/>
+            <xsl:apply-templates select="aoml:event[@type='planet']"/>
           </table>
         </xsl:if>
-        <xsl:if test="aeml:event[@type='sun']">
+        <xsl:if test="aoml:event[@type='sun']">
           <h2>Sun Events</h2>
           <table border="1">
             <tr>
@@ -82,10 +82,10 @@ To Do:
               <th>Time</th>
               <th>Notes</th>
             </tr>
-            <xsl:apply-templates select="aeml:event[@type='sun']"/>
+            <xsl:apply-templates select="aoml:event[@type='sun']"/>
           </table>
         </xsl:if>
-        <xsl:if test="aeml:event[@type='meteor']">
+        <xsl:if test="aoml:event[@type='meteor']">
           <h2>Meteor Events</h2>
           <table border="1">
             <tr>
@@ -94,10 +94,10 @@ To Do:
               <th>Time</th>
               <th>Notes</th>
             </tr>
-            <xsl:apply-templates select="aeml:event[@type='meteor']"/>
+            <xsl:apply-templates select="aoml:event[@type='meteor']"/>
           </table>
         </xsl:if>
-        <xsl:if test="aeml:event[@type='planet/minor']">
+        <xsl:if test="aoml:event[@type='planet/minor']">
           <h2>Minor Planet Events</h2>
           <table border="1">
             <tr>
@@ -106,10 +106,10 @@ To Do:
               <th>Time</th>
               <th>Notes</th>
             </tr>
-            <xsl:apply-templates select="aeml:event[@type='planet/minor']"/>
+            <xsl:apply-templates select="aoml:event[@type='planet/minor']"/>
           </table>
         </xsl:if>
-        <xsl:if test="aeml:event[@type='comet']">
+        <xsl:if test="aoml:event[@type='comet']">
           <h2>Comet Events</h2>
           <table border="1">
             <tr>
@@ -118,10 +118,10 @@ To Do:
               <th>Time</th>
               <th>Notes</th>
             </tr>
-            <xsl:apply-templates select="aeml:event[@type='comet']"/>
+            <xsl:apply-templates select="aoml:event[@type='comet']"/>
           </table>
         </xsl:if>
-        <xsl:if test="aeml:event[@type='star/variable']">
+        <xsl:if test="aoml:event[@type='star/variable']">
           <h2>Variable Star Events</h2>
           <table border="1">
             <tr>
@@ -130,10 +130,10 @@ To Do:
               <th>Time</th>
               <th>Notes</th>
             </tr>
-            <xsl:apply-templates select="aeml:event[@type='star/variable']"/>
+            <xsl:apply-templates select="aoml:event[@type='star/variable']"/>
           </table>
         </xsl:if>
-        <xsl:if test="aeml:event[@type='deepsky']">
+        <xsl:if test="aoml:event[@type='deepsky']">
           <h2>Deepsky Events</h2>
           <table border="1">
             <tr>
@@ -142,10 +142,10 @@ To Do:
               <th>Time</th>
               <th>Notes</th>
             </tr>
-            <xsl:apply-templates select="aeml:event[@type='deepsky']"/>
+            <xsl:apply-templates select="aoml:event[@type='deepsky']"/>
           </table>
         </xsl:if>
-        <xsl:if test="aeml:event[@type='misc']">
+        <xsl:if test="aoml:event[@type='misc']">
           <h2>Other Events</h2>
           <table border="1">
             <tr>
@@ -154,13 +154,13 @@ To Do:
               <th>Time</th>
               <th>Notes</th>
             </tr>
-            <xsl:apply-templates select="aeml:event[@type='misc']"/>
+            <xsl:apply-templates select="aoml:event[@type='misc']"/>
           </table>
         </xsl:if>
 
         <h2>References</h2>
         <ol>
-          <xsl:for-each select="aeml:reference">
+          <xsl:for-each select="aoml:reference">
             <li>
               <xsl:value-of select="."/>
             </li>
@@ -171,33 +171,33 @@ To Do:
   </xsl:template>
 
   <!-- Here I attempt to define a consistent style for all event types. -->
-  <xsl:template match="aeml:event">
+  <xsl:template match="aoml:event">
     <tr>
       <xsl:attribute name="class">
         <xsl:value-of select="@level"/>
       </xsl:attribute>
       <td>
-        <xsl:value-of select="aeml:summary"/>
+        <xsl:value-of select="aoml:summary"/>
       </td>
       <td>
-        <xsl:value-of select="aeml:datetime/aeml:date"/>
+        <xsl:value-of select="aoml:datetime/aoml:date"/>
       </td>
       <xsl:choose>
-        <xsl:when test="count(aeml:datetime/aeml:time) = 1">
+        <xsl:when test="count(aoml:datetime/aoml:time) = 1">
           <td align="right">
-            <xsl:value-of select="aeml:datetime/aeml:time"/> (<xsl:value-of
-              select="aeml:datetime/@timezone"/>)</td>
+            <xsl:value-of select="aoml:datetime/aoml:time"/> (<xsl:value-of
+              select="aoml:datetime/@timezone"/>)</td>
         </xsl:when>
-        <xsl:when test="count(aeml:datetime/aeml:time) = 0">
+        <xsl:when test="count(aoml:datetime/aoml:time) = 0">
           <td>
             <xsl:text> </xsl:text>
           </td>
         </xsl:when>
       </xsl:choose>
-      <xsl:if test="count(aeml:notes) > 0">
+      <xsl:if test="count(aoml:notes) > 0">
         <td>
           <ol>
-            <xsl:apply-templates select="aeml:notes"/>
+            <xsl:apply-templates select="aoml:notes"/>
           </ol>
         </td>
       </xsl:if>
@@ -205,7 +205,7 @@ To Do:
   </xsl:template>
 
   <!-- To keep the template above manageable, I break out the notes. -->
-  <xsl:template match="aeml:notes">
+  <xsl:template match="aoml:notes">
     <xsl:for-each select=".">
       <li>
         <xsl:attribute name="class">

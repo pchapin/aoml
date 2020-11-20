@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="AEML.xsl" type="text/xsl" media="screen"?>
 
-<!-- FILE   : sample-AE.xml
+<!-- FILE   : sample-events.xml
      AUTHOR : Peter C. Chapin
      SUBJECT: Astronomical Events for July 2003 -->
 
-<eventlist xmlns="http://www.pchapin.org/XML/AEML"
+<eventlist xmlns="http://www.pchapin.org/XML/AOML"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.pchapin.org/XML/AEML AEML.xsd">
+  xsi:schemaLocation="http://www.pchapin.org/XML/AOML AOML.xsd">
 
   <title>Astronomical Events for July 2003</title>
 
