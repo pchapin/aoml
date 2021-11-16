@@ -146,6 +146,7 @@ TO DO
       <xs:element name="observer" type="observerType" minOccurs="0"/>
       <xs:element name="equipment" type="equipmentType" minOccurs="0"/>
       <xs:element name="skyconditions" type="skyconditionsType" minOccurs="0"/>
+      <xs:element name="brightness" type="xs:float" minOccurs="0"/>
       <xs:element name="notes" type="notesType" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>

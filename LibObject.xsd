@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- FILE        : LibObject.xsd
-     LAST REVISED: 2005-04-12
+     LAST REVISED: 2021-11-16
      AUTHOR      : (C) Copyright by Peter C. Chapin
      SUBJECT     : Object library for AOML.
 
@@ -150,6 +150,34 @@ TO DO
     </xs:complexContent>
   </xs:complexType>
   <!-- end starMultipleObjectType -->
+  
+  <xs:complexType name="starVariableObjectType">
+    <xs:annotation>
+      <xs:documentation>
+        <p xmlns="http://www.w3.org/1999/xhtml">This type contains elements that hold
+          specialized information about variable stars.</p>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="objectType">
+        <xs:sequence>
+          <!-- First specify the brightness range of the variable. -->
+          <xs:element name="range">
+            <xs:annotation>
+              <xs:documentation>This element contains information about the brightness range
+                of the variable star. The 'min' and 'max' attributes give the minimum
+                brightness and the maximum brightness, respectively.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:attribute name="min" type="xs:float" use="required"/>
+              <xs:attribute name="max" type="xs:float" use="required"/>
+            </xs:complexType>      
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- end starVariableObjectType -->
 
   <!-- ===== Supporting Complex Types ===== -->
   <xs:complexType name="objectIDType">
@@ -333,7 +361,7 @@ TO DO
 
   <xs:simpleType name="objectTypeType">
     <xs:annotation>
-      <xs:documentation>The type of object. it can contain only one of the elements from
+      <xs:documentation>The type of object. It can contain only one of the elements from
         the enumeration.</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:token">
