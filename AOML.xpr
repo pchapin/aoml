@@ -17,6 +17,7 @@
         <folder masterFiles="true" name="Master Files">
             <file name="AOML.xsd"/>
         </folder>
+        <file name="AO-2003-06-16.xml"/>
         <file name="AOML.ent"/>
         <file name="AOML.xsd"/>
         <file name="AOML.xsl"/>
