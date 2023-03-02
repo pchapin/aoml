@@ -7,4 +7,4 @@ observations of the sort made by amateurs (or groups of amateurs). This language
 progress and not yet suitable for wide deployment.
 
 Peter Chapin  
-chapinp@acm.org
+chapinp@proton.me

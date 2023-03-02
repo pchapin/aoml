@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- FILE        : LibEvent.xsd
      LAST REVISED: 2020-11-19
-     AUTHOR      : (C) Copyright 2020 by Peter C. Chapin
+     AUTHOR      : (C) Copyright 2020 by Peter Chapin
 
 This file contains the schema definition for AOML event descriptions.
 

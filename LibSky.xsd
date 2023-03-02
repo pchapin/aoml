@@ -1,13 +1,11 @@
 <?xml version="1.0"?>
 <!-- FILE        : LibSky.xsd
      LAST REVISED: 2005-04-08
-     AUTHOR      : (C) Copyright by Peter C. Chapin
+     AUTHOR      : (C) Copyright by Peter Chapin
      SUBJECT     : Sky conditions library for AOML.
 
 This schema defines elements and types pertaining to the description of
 sky conditions.
-
-{ How do I put this under the GPL or similar license? }
 
 TO DO
 

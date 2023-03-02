@@ -1,13 +1,10 @@
 <?xml version="1.0"?>
 <!-- FILE        : LibType.xsd
      LAST REVISED: 2003-08-28
-     AUTHOR      : (C) Copyright by Peter C. Chapin
+     AUTHOR      : (C) Copyright by Peter Chapin
      SUBJECT     : Type library for AOML.
 
-This is a utility schema that defines a number of types that are used by
-AOML.
-
-{ How do I put this under the GPL or similar license? }
+This is a utility schema that defines a number of types that are used by AOML.
 
 TO DO
 

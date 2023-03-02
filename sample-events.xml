@@ -2,7 +2,7 @@
 <?xml-stylesheet href="AEML.xsl" type="text/xsl" media="screen"?>
 
 <!-- FILE   : sample-events.xml
-     AUTHOR : Peter C. Chapin
+     AUTHOR : Peter Chapin
      SUBJECT: Astronomical Events for July 2003 -->
 
 <eventlist xmlns="http://www.pchapin.org/XML/AOML"

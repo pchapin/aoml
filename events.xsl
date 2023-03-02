@@ -3,11 +3,11 @@
 <!--
      FILE        : events.xsl
      LAST REVISED: 2020-11-19
-     AUTHOR      : Peter C. Chapin
+     AUTHOR      : Peter Chapin
 
 This file contains a stylesheet suitable for converting aoml into HTML. 
 
-To Do:
+TO DO:
 
 + (placeholder)
 

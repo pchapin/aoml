@@ -1,12 +1,10 @@
 <?xml version="1.0"?>
 <!-- FILE        : LibObject.xsd
      LAST REVISED: 2021-11-16
-     AUTHOR      : (C) Copyright by Peter C. Chapin
+     AUTHOR      : (C) Copyright by Peter Chapin
      SUBJECT     : Object library for AOML.
 
 This schema defines the various astronomical object types used by AOML.
-
-{ How do I put this under the GPL or similar license? }
 
 TO DO
 

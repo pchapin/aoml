@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- FILE    : AOML.xsd
-     AUTHOR  : (C) Copyright 2020 by Peter C. Chapin
+     AUTHOR  : (C) Copyright 2020 by Peter Chapin
      SUBJECT : XML schema for describing amateur astronomical observations.
 
 This markup is intended for use by amateur astronomers who are interested in recording their

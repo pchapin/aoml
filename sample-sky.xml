@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="sky.xsl"?>
 <!-- FILE        : sky-2003-0x.xml
-     AUTHOR      : (C) Copyright by Peter C. Chapin
+     AUTHOR      : (C) Copyright by Peter Chapin
      SUBJECT     : Sky condition observations for ...
 -->
 <observation-set xmlns="http://www.pchapin.org/XML/AOML"
@@ -23,7 +23,7 @@
       <xhtml:p>Central Vermont, USA</xhtml:p>
     </notes>
   </location>
-  <observer>Peter C. Chapin</observer>
+  <observer>Peter Chapin</observer>
   <notes>
     <xhtml:p>The temperature measurements shown here were all made with an inexpensive digital
       outdoor thermometer.</xhtml:p>

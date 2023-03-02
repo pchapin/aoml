@@ -25,5 +25,5 @@ for the Observation Manager project is
 
 Thanks for your interest! I hope you find this information useful.
 
-Peter C. Chapin <PChapin@vtc.vsc.edu>
+Peter Chapin <chapinp@proton.me>
 
