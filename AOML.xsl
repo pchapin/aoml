@@ -39,10 +39,10 @@
 ]>
 
 <!-- FILE    : AOML.xsl
-     AUTHOR  : (C) Copyright 2020 by Peter C. Chapin
+     AUTHOR  : (C) Copyright 2020 by Peter Chapin
      SUBJECT : Style sheet to convert astronomical observations into HTML.
      
-To Do:
+TO DO:
 
 + Include the primary datetime in the title. This is tough to do in general because observations
   sets might be factored on a different parameter than datetime.

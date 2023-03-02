@@ -2,10 +2,10 @@
 
 <!-- FILE        : sky.xsl
      LAST REVISED: 2020-11-19
-     AUTHOR      : (C) Copyright 2020 by Peter C. Chapin
+     AUTHOR      : (C) Copyright 2020 by Peter Chapin
      SUBJECT     : Style sheet to convert sky.xsd into an HTML table.
      
-To Do:
+TO DO:
 
 + The location element needs to be styled better. Provision should be made for longitude and
   latitude if they are present.
