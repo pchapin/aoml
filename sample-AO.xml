@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE observation-set [
+  <!-- Mozilla does not process external entities.
+  <!ENTITY % AOMLentities SYSTEM "AOML.ent">
+  %AOMLentities;
+  -->
+
+<!-- Useful symbols. -->
+<!ENTITY copy     "&#169;">
+
+<!-- Greek. Needed for star names. -->
+<!ENTITY alpha    "&#945;">
+<!ENTITY beta     "&#946;">
+<!ENTITY gamma    "&#947;">
+<!ENTITY delta    "&#948;">
+<!ENTITY epsilon  "&#949;">
+<!ENTITY zeta     "&#950;">
+<!ENTITY eta      "&#951;">
+<!ENTITY theta    "&#952;">
+<!ENTITY iota     "&#953;">
+<!ENTITY kappa    "&#954;">
+<!ENTITY lambda   "&#955;">
+<!ENTITY mu       "&#956;">
+<!ENTITY nu       "&#957;">
+<!ENTITY xi       "&#958;">
+<!ENTITY omicron  "&#959;">
+<!ENTITY pi       "&#960;">
+<!ENTITY rho      "&#961;">
+<!ENTITY sigma    "&#963;">
+<!ENTITY tau      "&#964;">
+<!ENTITY upsilon  "&#965;">
+<!ENTITY phi      "&#966;">
+<!ENTITY chi      "&#967;">
+<!ENTITY psi      "&#968;">
+<!ENTITY omega    "&#969;">
+
+]>
+
+<?xml-stylesheet type="text/xsl" href="AOML.xsl"?>
+
+<observation-set xmlns="http://www.pchapin.org/XML/AOML"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.pchapin.org/XML/AOML AOML.xsd">
+
+  <datetimerange>
+    <start resolution="PT10M">
+      <ISO>2003-01-01T00:00:00Z</ISO>
+    </start>
+    <end resolution="PT10M">
+      <ISO>2003-01-01T00:10:00Z</ISO>
+    </end>
+  </datetimerange>
+  <location>
+    <value>
+      <lat-long-alt>+43.00-072.50+300</lat-long-alt>
+    </value>
+    <notes>
+      <xhtml:p>US-Vermont-Tunbridge</xhtml:p>
+    </notes>
+  </location>
+  <observer>Peter C. Chapin</observer>
+  <equipment>
+    <notes>
+      <xhtml:p>75mm Unitron refractor...</xhtml:p>
+    </notes>
+  </equipment>
+  <notes>
+    <xhtml:p>My plan for the evening was...</xhtml:p>
+  </notes>
+
+  <observation>
+    <object>
+      <id catalog="M" id="13"/>
+      <type>cluster/globular</type>
+    </object>
+    <notes>
+      <xhtml:p>I observed this object...</xhtml:p>
+    </notes>
+  </observation>
+
+  <observation>
+    <object xsi:type="starMultipleObjectType">
+      <id catalog="ADS" id="10526"/>
+      <name>Rho Her</name>
+      <type>star/multiple</type>
+      <position>
+        <equatorial right-ascension="17h22.0m" declination="+37d11m" equinox="B1950.0"/>
+      </position>
+      <constellation>Her</constellation>
+      <component designation="A">
+        <magnitude>4.52</magnitude>
+      </component>
+      <component designation="B">
+        <magnitude>5.47</magnitude>
+      </component>
+      <separation designation-1="A" designation-2="B" distance="4.0"/>
+    </object>
+    <notes>
+      <xhtml:p>This was a very nice double...</xhtml:p>
+    </notes>
+  </observation>
+
+  <observation>
+    <object>
+      <name>Jupiter</name>
+      <type>planet</type>
+    </object>
+    <notes>
+      <xhtml:p>The giant planet was fairly low...</xhtml:p>
+    </notes>
+  </observation>
+
+</observation-set>

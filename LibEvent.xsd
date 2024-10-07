@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!-- FILE        : LibEvent.xsd
+     LAST REVISED: 2020-11-19
+     AUTHOR      : (C) Copyright 2020 by Peter Chapin
+
+This file contains the schema definition for AOML event descriptions.
+
+To Do:
+
++ Need to enhance the way references are handled.
+
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" elementFormDefault="qualified"
+  xml:lang="en-US">
+  
+  <xs:element name="eventlist">
+    <xs:annotation>
+      <xs:documentation>An eventlist contains a list of events. The title child element
+      describes the list as a whole. For example, it might specify the range of dates over which
+      the events in the list apply.</xs:documentation>
+    </xs:annotation>
+
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="title" type="xs:string"/>
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+          <xs:choice>
+            <xs:element name="event" type="eventType"/>
+            <xs:element name="reference">
+              <xs:complexType>
+                <xs:simpleContent>
+                  <xs:extension base="xs:string">
+                    <xs:attribute name="refID" type="xs:ID"/>
+                  </xs:extension>
+                </xs:simpleContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:sequence>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="eventType">
+    <xs:annotation>
+      <xs:documentation>This type describes the content of a single event. Each event has a type
+        that is specified by the required "type" attribute. Events can also be rated based on
+        their level. For example, events of special interest to novices could be given the
+        "novice" level to indicate that. Events of interest to all observers should be given the
+        level "all".</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="summary" type="xs:string"/>
+      <xs:element name="datetime" type="dateTimeType"/>
+      <xs:element name="notes" type="eventNotesType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="ref" type="refType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="level" default="all">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="novice"/>
+          <xs:enumeration value="intermediate"/>
+          <xs:enumeration value="advanced"/>
+          <xs:enumeration value="all"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="type" type="typeType" use="required"/>
+    <xs:attribute name="eventID" type="xs:ID" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="refType">
+    <xs:annotation>
+      <xs:documentation>This type describes elements that contain reference information.
+        Document authors can use such elements to describe the source of event information in
+        their documents.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="hyper"/>
+              <xs:enumeration value="printed"/>
+              <xs:enumeration value="person"/>
+              <xs:enumeration value="other"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="details" type="xs:IDREF"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="eventNotesType">
+    <xs:annotation>
+      <xs:documentation>This type is an extension of the notesType in the type library. It adds
+        a level attribute so that notes can be flagged according to the level of the observer
+        who would be interested in them. For example even an event of interest to novices might
+        well have a few advanced notes for the more accomplished observer.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="notesType">
+        <xs:attribute name="level" default="all">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="novice"/>
+              <xs:enumeration value="intermediate"/>
+              <xs:enumeration value="advanced"/>
+              <xs:enumeration value="all"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Simple Types -->
+
+  <xs:simpleType name="typeType">
+    <xs:annotation>
+      <xs:documentation>This type is used to describe the kinds of events that can be described
+        with AOML. The names of the event types are intended to be somewhat similar to the names
+        of the object types.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="comet"/>
+      <xs:enumeration value="deepsky"/>
+      <xs:enumeration value="meteor"/>
+      <xs:enumeration value="misc"/>
+      <xs:enumeration value="moon"/>
+      <xs:enumeration value="planet"/>
+      <xs:enumeration value="planet/minor"/>
+      <xs:enumeration value="star/variable"/>
+      <xs:enumeration value="sun"/>
+      <xs:enumeration value="unspecified"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

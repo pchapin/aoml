@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE observation-set [
+
+<!--
+  <!ENTITY % AOMLentities SYSTEM "AOML.ent">
+  %AOMLentities;
+-->
+
+<!-- Greek. Useful for star names. -->
+<!ENTITY alpha    "&#945;">
+<!ENTITY beta     "&#946;">
+<!ENTITY gamma    "&#947;">
+<!ENTITY delta    "&#948;">
+<!ENTITY epsilon  "&#949;">
+<!ENTITY zeta     "&#950;">
+<!ENTITY eta      "&#951;">
+<!ENTITY theta    "&#952;">
+<!ENTITY iota     "&#953;">
+<!ENTITY kappa    "&#954;">
+<!ENTITY lambda   "&#955;">
+<!ENTITY mu       "&#956;">
+<!ENTITY nu       "&#957;">
+<!ENTITY xi       "&#958;">
+<!ENTITY omicron  "&#959;">
+<!ENTITY pi       "&#960;">
+<!ENTITY rho      "&#961;">
+<!ENTITY sigma    "&#963;">
+<!ENTITY tau      "&#964;">
+<!ENTITY upsilon  "&#965;">
+<!ENTITY phi      "&#966;">
+<!ENTITY chi      "&#967;">
+<!ENTITY psi      "&#968;">
+<!ENTITY omega    "&#969;">
+]>
+
+<?xml-stylesheet type="text/xsl" href="AOML/AOML.xsl"?>
+
+<observation-set xmlns="http://www.pchapin.org/XML/AOML"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <datetimerange>
+    <start resolution="PT05M">
+      <ISO>2003-06-16T02:00:00Z</ISO>
+    </start>
+    <end resolution="PT05M">
+      <ISO>2003-06-16T03:13:00Z</ISO>
+    </end>
+  </datetimerange>
+  <location>
+    <value>
+      <lat-long-alt>+43.00-072.50+300</lat-long-alt>
+    </value>
+    <notes>
+      <xhtml:p>US-Vermont-Tunbridge</xhtml:p>
+    </notes>
+  </location>
+  <observer>Peter C. Chapin</observer>
+  <equipment>
+    <notes>
+      <xhtml:p>75mm Unitron refractor with the following eyepieces: 25mm (48x), 18mm (67x),
+        12.5mm (96x), and 9mm (133x). I also used a 10x60 binoculars, primarily to help locate
+        objects.</xhtml:p>
+    </notes>
+  </equipment>
+  <notes>
+    <xhtml:p>My plan for the evening was to look at some stars in Her. At one point I saw a
+      rather nice meteor moving northward through Cyg, approximately parallel to the main axis
+      of the constellation. I also noticed, over the course of the evening, several satellites.
+      They were all moving south to north through the Hercules area. In one case I caught one
+      flashing through my 133x field of view!</xhtml:p>
+
+    <xhtml:p>I saw the first firefly of the season tonight as well.</xhtml:p>
+  </notes>
+
+  <observation>
+    <object xsi:type="starMultipleObjectType">
+      <id catalog="ADS" id="10526"/>
+      <name>&rho; Her</name>
+      <type>star/multiple</type>
+      <constellation>Her</constellation>
+      <component designation="A">
+        <magnitude>4.52</magnitude>
+      </component>
+      <component designation="B">
+        <magnitude>5.47</magnitude>
+      </component>
+      <separation designation-1="A" designation-2="B" distance="4.0"/>
+    </object>
+    <notes>
+      <xhtml:p>This was a very nice double. It was barely resolved with the 25mm eyepiece but
+        the best view was with 9mm. At 133x there was quite a bit of separation between the
+        components but not so much as to be "wide"; they made a pleasing pair. The secondary is
+        noticeably fainter than the primary but not excessively so. The secondary appeared
+        slightly blue-grey compared to the primary but it could easily have been an
+      illusion.</xhtml:p>
+    </notes>
+  </observation>
+
+  <observation>
+    <object xsi:type="starMultipleObjectType">
+      <id catalog="ADS" id="10449"/>
+      <name>68 Her</name>
+      <type>star/multiple</type>
+      <constellation>Her</constellation>
+      <component designation="A">
+        <magnitude>var</magnitude>
+      </component>
+      <component designation="B">
+        <magnitude>10.0</magnitude>
+      </component>
+      <separation designation-1="A" designation-2="B" distance="4.5"/>
+    </object>
+    <notes>
+      <xhtml:p>I observed this star at several magnifications including with the 9mm (133x). I
+        was unable to see the secondary due, presumably, to its faintness. The glare from the
+        primary was excessive when averted vision was used and direct vision was apparently not
+        enough to see the faint companion.</xhtml:p>
+    </notes>
+  </observation>
+
+  <observation>
+    <object>
+      <id catalog="IC" id="4665"/>
+      <type>cluster/open</type>
+      <constellation>Oph</constellation>
+    </object>
+    <equipment>
+      <notes>
+        <xhtml:p>Celestron 10x60 binoculars</xhtml:p>
+      </notes>
+    </equipment>
+    <notes>
+      <xhtml:p>I got a very nice view of this cluster in my new 10x60 binoculars. The 10x
+        magnification was enough to show the cluster well without spreading it out too much. The
+        cluster appeared reasonably rich and interesting. I got the impression that it was
+        somewhat oblong in shape.</xhtml:p>
+    </notes>
+  </observation>
+
+  <observation>
+    <object xsi:type="starMultipleObjectType">
+      <id catalog="ADS" id="10418"/>
+      <name>&alpha; Her</name>
+      <type>star/multiple</type>
+      <constellation>Her</constellation>
+      <component designation="A">
+        <magnitude>var</magnitude>
+      </component>
+      <component designation="B">
+        <magnitude>5.39</magnitude>
+      </component>
+      <separation designation-1="A" designation-2="B" distance="4.6"/>
+    </object>
+    <notes>
+      <xhtml:p>Easily resolved with higher magnifications. I got the best view with the 9mm
+        eyepiece. The secondary is considerably fainter than the primary and somewhat "involved"
+        with the glare from the primary. It is, however, distinct from that glare and visible
+        without any question. The primary was clearly orange while the secondary might have had
+        a slight greenish hue. Overall I found the glare from the primary to be a detraction; I
+        felt that Rho Her was more satisfying overall.</xhtml:p>
+    </notes>
+  </observation>
+
+  <observation>
+    <object xsi:type="starMultipleObjectType">
+      <id catalog="ADS" id="10535"/>
+      <type>star/multiple</type>
+      <position>
+        <equatorial right-ascension="17h22.7m" declination="+37d00m" equinox="B1950.0"/>
+      </position>
+      <constellation>Her</constellation>
+      <component designation="A">
+        <magnitude>6.5</magnitude>
+      </component>
+      <component designation="B">
+        <magnitude>9.9</magnitude>
+      </component>
+      <separation designation-1="A" designation-2="B" distance="33.0"/>
+    </object>
+    <notes>
+      <xhtml:p>Despite the wide separation I found this double somewhat tricky due to the
+        faintness of the secondary. With the 25mm eyepiece (48x) it was difficult, though
+        possible, to see the secondary using averted vision. The glare from the primary was the
+        main problem. At a higher magnification the secondary was more easily seen because it
+        was farther from the primary and thus more inclined to be out of the primary's glare. I
+        got the best overall view with the 12.5mm (96x). Alas, the wide separation and the
+        faintness of the secondary didn't make this a very satisfying double. It didn't really
+        "feel" like a double at all.</xhtml:p>
+    </notes>
+  </observation>
+
+  <observation>
+    <object xsi:type="starMultipleObjectType">
+      <id catalog="ADS" id="10993"/>
+      <name>95 Her</name>
+      <type>star/multiple</type>
+      <constellation>Her</constellation>
+      <component designation="A">
+        <magnitude>5.21</magnitude>
+      </component>
+      <component designation="B">
+        <magnitude>5.13</magnitude>
+      </component>
+      <separation designation-1="A" designation-2="B" distance="6.5"/>
+    </object>
+    <notes>
+      <xhtml:p>Easily split using even the 25mm eyepiece. This was a very nice double. The near
+        equal magnitudes and relatively close separation gave a very satisfying view. Both stars
+        appeared basically white although one star did appear to have a slight reddish hue
+        compared to the other. The best overall view was with the 18mm eyepiece.</xhtml:p>
+    </notes>
+  </observation>
+
+  <observation>
+    <object xsi:type="starMultipleObjectType">
+      <id catalog="ADS" id="11028"/>
+      <type>star/multiple</type>
+      <position>
+        <equatorial right-ascension="18h01.8m" declination="+48d28m" equinox="B1950.0"/>
+      </position>
+      <constellation>Her</constellation>
+      <component designation="A">
+        <magnitude>6.06</magnitude>
+      </component>
+      <component designation="B">
+        <magnitude>8.2</magnitude>
+      </component>
+      <separation designation-1="A" designation-2="B" distance="27.2"/>
+    </object>
+    <notes>
+      <xhtml:p>Based on my experience with ADS-10535 I was expecting this double to also be
+        somewhat disappointing. However, despite the wide separation and faint secondary it
+        actually gave a rather nice view. The secondary showed up fine with the 25mm and was
+        easily visible with direct vision. The glare from the primary was also not excessive. I
+        think the main reason why this double was more satisfying than ADS-10535 was because
+        averted vision was not required to see either component.</xhtml:p>
+    </notes>
+  </observation>
+
+</observation-set>

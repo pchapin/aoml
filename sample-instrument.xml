@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sample instrument markup. I'm just experimenting here. -->
+
+<instruments>
+  <!--
+    The idea of the instruments element is to serve as a container for multiple instruments. I'm
+    imagining an observer sometimes keeping this information separate from the observations
+    themselves and sometimes "attaching" this information to the observations (especially in
+    cases where a single observation is being forwarded to someone else). -->
+
+  <!--
+    Significantly different types of optical instruments should have their own elements because
+    the way of characterizing each is quite different (is this true?) The "key" attribute is
+    intended to be used to refer to an instrument from an observation. It would be undesirable
+    if an observer had to specify all of his/her instruments in each observation! I'm sure this
+    problem has been thought about before; I'm not sure what the solution should be. -->
+
+  <eye key="00">
+    <notes>
+      <p>Each instrument type should have a notes element. This can be the same notes used in
+        the sky conditions observations. It should allow for a fairly rich markup. Observers
+        should be able to put all information of interest in notes elements if they want.</p>
+    </notes>
+  </eye>
+
+  <!-- Should some of the attributes below actually be child elements? -->
+  <binoculars key="01" mag="7" size="50" type="(not sure)" coatings="(not sure)">
+    <notes>
+      <p>This instrument is old and very dirty.</p>
+    </notes>
+  </binoculars>
+
+  <!-- Should some of the attributes below actually be child elements? For example, I don't like
+       the "subtype" attribute. To me that's a sign that there should be child elements. -->
+  <telescope key="02" type="refractor" subtype="achromatic" size="75mm" f="16"
+    mounting="equatorial">
+    <notes>
+      <p>Mounting needs work.</p>
+    </notes>
+  </telescope>
+
+  <!--
+    Many people observe with cameras. It is important to decorate pictures and such with
+    information about the camera used to make that picture. I don't do any camera work so I'm
+    not sure how to best handle this. It seems like file and exposure information needs to be
+    handled elsewhere for sure. These elements should be just for the "static" information about
+    a camera. -->
+  <camera type="film"/>
+
+  <!--
+    Many observers are getting into CCD cameras these days so they may need a special element of
+    their own. -->
+  <camera type="CCD"/>
+
+  <!--
+    Clearly other instrument types might become important in the future. It is desirable if this
+    schema allows for the easy, backwardly compatible addition of new instrument types. -->
+
+</instruments>

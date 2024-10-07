@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="sky.xsl"?>
+<!-- FILE        : sky-2003-0x.xml
+     AUTHOR      : (C) Copyright by Peter Chapin
+     SUBJECT     : Sky condition observations for ...
+-->
+<observation-set xmlns="http://www.pchapin.org/XML/AOML"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.pchapin.org/XML/AOML AOML.xsd">
+
+  <!--
+    Location, observer, datetime, and notes information immediately inside an observation-set is
+    meant to apply to all observations in that observation-set. In this way information that is
+    common to all observations can be factored out and need not be repeated inside each
+    observation element. -->
+
+  <location>
+    <value>
+      <lat-long-alt>+43.00-072.50+300</lat-long-alt>
+    </value>
+    <notes>
+      <xhtml:p>Central Vermont, USA</xhtml:p>
+    </notes>
+  </location>
+  <observer>Peter Chapin</observer>
+  <notes>
+    <xhtml:p>The temperature measurements shown here were all made with an inexpensive digital
+      outdoor thermometer.</xhtml:p>
+  </notes>
+
+  <observation>
+
+    <!--
+      Location, observer, datetime, and notes information inside an observation is meant to
+      apply to that observation only and overrides any values "inherited" from the
+      observation-set element. -->
+
+    <localdatetime type="LST" resolution="PT10M">
+      <ISO>2003-02-01T22:00:00</ISO>
+    </localdatetime>
+
+    <skyconditions>
+
+      <!--
+        The weather element contains some "precise" data and a notes element for more "informal"
+        comments. Notice that I'm also providing a notes element for each precise data field as
+        well. That element is intended to store any additional information about the observation
+        that the observer feels might be significant such as the instrument used or any quirks
+        of the measurement that might affect its accuracy. -->
+
+      <weather>
+        <temperature>
+          <value units="C">0.0</value>
+        </temperature>
+
+        <!--
+          The notes element inside the weather element is intended to describe the weather in
+          general terms. This is a good place to record information about the weather that does
+          not fall into the other elements. -->
+
+        <notes>
+          <xhtml:p>Placeholder.</xhtml:p>
+        </notes>
+      </weather>
+
+      <!--
+        The actual astronomical sky conditions are below. Although most of these quantities are
+        subjective in nature I tried to follow the same sort of structure as I did with the
+        weather element. In particular, I included a notes child element in each element for
+        unstructured comments. At the moment only limiting-mag has a value field for "precise"
+        data. In the future some of the other elements may also acquire a value field. -->
+
+      <limitingmag>
+        <value method="IMO">5.7</value>
+        <notes>
+          <xhtml:p>I used regions 3, 4, and 7.</xhtml:p>
+        </notes>
+      </limitingmag>
+
+      <seeing>
+        <notes>
+          <xhtml:p>Unobserved. Twinkling minimal.</xhtml:p>
+        </notes>
+      </seeing>
+
+      <!--
+        The notes element contains a summary of the sky conditions in general terms. It reflects
+        what one observer might say to another in a couple of easy sentences to quickly convey
+        the general quality of the night. -->
+      <notes>
+        <xhtml:p>Placeholder.</xhtml:p>
+      </notes>
+
+      <!--
+        The rating element contains a numeric summary of the sky conditions. I included this so
+        that I could easily process a large number of observations and make some statements, for
+        example, about the number of "good" nights during any particular time period. The actual
+        rating system that I use is described in sky-codes.htm. Currently the format of this
+        element is open so other observers could use a different rating system. I'm not sure
+        if that's a good thing or not. -->
+
+      <rating>0</rating>
+    </skyconditions>
+  </observation>
+
+</observation-set>

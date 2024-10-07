@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="AEML.xsl" type="text/xsl" media="screen"?>
+
+<!-- FILE   : sample-events.xml
+     AUTHOR : Peter Chapin
+     SUBJECT: Astronomical Events for July 2003 -->
+
+<eventlist xmlns="http://www.pchapin.org/XML/AOML"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.pchapin.org/XML/AOML AOML.xsd">
+
+  <title>Astronomical Events for July 2003</title>
+
+  <!-- The references and events listed here are samples only. -->
+
+  <!-- First, my references -->
+
+  <reference refID="P0001">"Astronomical Calendar 2003" by Guy Ottewell. Published by Universal
+    Workshop (http://www.universalworkshop.com). ISBN=0-934546-48-7</reference>
+
+  <reference refID="P0002">"Sky &amp; Telescope" Vol. 106, No. 1, July 2003</reference>
+
+  <reference refID="H0001">International Meteor Organization web site at: http://www.imo.org/.</reference>
+
+  <!-- To facilitate editing, keep all events of the same type together.
+       They should be in chronological order but the eventID attributes do
+       not need to be in order (as long as they are unique, of course).
+       The ordering of the event types is not (currently) relevant. -->
+
+  <!-- Comet events -->
+
+  <!-- Deepsky events -->
+
+  <!-- Meteor events -->
+  <event eventID="meteor-0001" type="meteor" level="intermediate">
+    <summary>Delta Aquarids South</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-28</date>
+    </datetime>
+    <notes>
+      <xhtml:p>Active from July 13 through August 19. ZHR=20. Radiant: RA=22h36m, DEC=-16d.
+        Atmospheric velocity 41 km/s.</xhtml:p>
+
+      <xhtml:p>The moon is near new for the maximum of this shower making it a good year for
+        observing it. Most shower members are medium speed and faint.</xhtml:p>
+    </notes>
+  </event>
+
+  <event eventID="meteor-0002" type="meteor" level="advanced">
+    <summary>Alpha Capricornids</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-30</date>
+    </datetime>
+    <notes>
+      <xhtml:p>Active July 3 through August 15. ZHR=4, Radiant: RA=20h28m, DEC=-10d. Atmospheric
+        velocity 23 km/s. Radiant daily drift: +3.8m, +0.3d.</xhtml:p>
+
+      <xhtml:p>The moon is near new for the maximum of this shower making it a good year for
+        observing it. Shower members are typically slow and bright. Often they are fireballs.
+        Note that this is quite different from the members of the Delta Aquarids South shower
+        that should be active at about the same time and from a similar direction. Note that
+        this shower is normally quite weak.</xhtml:p>
+    </notes>
+  </event>
+
+  <!-- Misc events -->
+
+  <!-- Moon events -->
+  <event eventID="moon-0001" type="moon" level="advanced">
+    <summary>Maximum liberation</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-03</date>
+      <time>11:00:00</time>
+    </datetime>
+    <notes>
+      <xhtml:p>8.6d. Mare Humorum, dark limb, tipped our way.</xhtml:p>
+    </notes>
+  </event>
+
+  <event eventID="moon-0002" type="moon" level="novice">
+    <summary>Moon at first quarter</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-07</date>
+      <time>02:32</time>
+    </datetime>
+  </event>
+
+  <event eventID="moon-0003" type="moon" level="all">
+    <summary>Moon at perigee</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-10</date>
+      <time>22:00:00</time>
+    </datetime>
+    <notes>
+      <xhtml:p>Distance = 365,145 km. Apparent size = 32m43s</xhtml:p>
+    </notes>
+  </event>
+
+  <event eventID="moon-0004" type="moon" level="novice">
+    <summary>Moon full</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-13</date>
+      <time>19:20</time>
+    </datetime>
+  </event>
+
+  <event eventID="moon-0005" type="moon" level="advanced">
+    <summary>Maximum liberation</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-16</date>
+      <time>17:00:00</time>
+    </datetime>
+    <notes>
+      <xhtml:p>9.0d. Mare Crisium, dark limb, tipped our way.</xhtml:p>
+    </notes>
+  </event>
+
+  <event eventID="moon-0006" type="moon" level="novice">
+    <summary>Moon at last quarter</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-21</date>
+      <time>07:02</time>
+    </datetime>
+  </event>
+
+  <event eventID="moon-0007" type="moon" level="all">
+    <summary>Moon at apogee</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-22</date>
+      <time>20:00:00</time>
+    </datetime>
+    <notes>
+      <xhtml:p>Distance = 406,328 km. Apparent size = 29m33s</xhtml:p>
+    </notes>
+  </event>
+
+  <event eventID="moon-0008" type="moon" level="novice">
+    <summary>Moon new</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-29</date>
+      <time>06:52</time>
+    </datetime>
+  </event>
+
+  <event eventID="moon-0009" type="moon" level="advanced">
+    <summary>Maximum liberation</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-30</date>
+      <time>08:00:00</time>
+    </datetime>
+    <notes>
+      <xhtml:p>8.1d. Mare Humorum tipped our way at new moon.</xhtml:p>
+    </notes>
+  </event>
+
+  <!-- Planet events -->
+  <event type="planet" eventID="planet-0001" level="novice">
+    <summary>Venus 0.83d N of Saturn</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-08</date>
+      <time>07:00</time>
+    </datetime>
+    <notes>
+      <xhtml:p>Venus is at magnitude -3.9. Saturn is at magnitude 0.1</xhtml:p>
+    </notes>
+    <notes>
+      <xhtml:p>This conjunction occurs 11d from the sun in the morning sky.</xhtml:p>
+    </notes>
+  </event>
+
+  <event type="planet" eventID="planet-0002">
+    <summary>Venus at greatest north declination</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-08</date>
+      <time>08:00</time>
+    </datetime>
+    <notes>
+      <xhtml:p>DEC=+23.4d</xhtml:p>
+    </notes>
+  </event>
+
+  <event type="planet" eventID="planet-0003" level="novice">
+    <summary>Mercury 0.36d NNE of Jupiter</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-26</date>
+      <time>03:00</time>
+    </datetime>
+    <notes>
+      <xhtml:p>Mercury is at magnitude -0.3. Jupiter is at magnitude -1.7.</xhtml:p>
+    </notes>
+    <notes>
+      <xhtml:p>This conjunction occurs 20d from the sun in the evening sky.</xhtml:p>
+    </notes>
+  </event>
+
+  <event type="planet" eventID="planet-0004" level="novice">
+    <summary>Mercury 0.17d NNE of Regulus</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-30</date>
+      <time>12:00</time>
+    </datetime>
+    <notes>
+      <xhtml:p>Mercury is at magnitude -0.1. Regulus is at magnitude 1.4.</xhtml:p>
+    </notes>
+    <notes>
+      <xhtml:p>This is the closest approach of a planet to a 1st magnitude star this
+        year.</xhtml:p>
+    </notes>
+    <notes>
+      <xhtml:p>This conjunction occurs 23d from the sun in the evening sky.</xhtml:p>
+    </notes>
+  </event>
+
+  <!-- Planet/minor events -->
+
+  <!-- Star/variable events -->
+
+  <!-- Sun events -->
+  <event type="sun" eventID="sun-0001">
+    <summary>Sun enters Cancer</summary>
+    <datetime timezone="UTC">
+      <date>2003-07-21</date>
+      <time>05:00</time>
+    </datetime>
+    <notes>
+      <xhtml:p>Ecliptic longitude 118.03 degrees.</xhtml:p>
+    </notes>
+  </event>
+
+</eventlist>

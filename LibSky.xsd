@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<!-- FILE        : LibSky.xsd
+     LAST REVISED: 2005-04-08
+     AUTHOR      : (C) Copyright by Peter Chapin
+     SUBJECT     : Sky conditions library for AOML.
+
+This schema defines elements and types pertaining to the description of
+sky conditions.
+
+TO DO
+
++ Specify the format and semantics of the rating element here? Or is it
+  better to leave it open?
+
++ This schema refers to a number of top level elements. Do I really want
+  to do that? Probably not. Probably the elements should be named
+  locally and the complex types (only) should be at the top level.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" elementFormDefault="qualified"
+  xml:lang="en-US">
+
+  <xs:complexType name="skyconditionsType">
+    <xs:annotation>
+      <xs:documentation>The sky-condition element holds the main component of the
+        observation. Notice that all child elements are optional except for the notes.
+        This is because, depending on the kind of observations a person intends to make,
+        some qualities of the sky conditions may be unobserved or irrelevant. Even a
+        formal weather element may not be necessary in all cases. An observer may wish to
+        use the notes element alone to informally describe all aspects of the sky. Note
+        that I also provide a rating element to hold a simple (or fairly simple) numeric
+        summary of the sky conditions. Numeric summaries are easier to search and
+        otherwise process than informal "notes". This schema currently leaves the exact
+        format of the rating element open.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="weather" minOccurs="0"/>
+      <xs:element ref="limitingmag" minOccurs="0"/>
+      <xs:element ref="seeing" minOccurs="0"/>
+      <xs:element name="notes" type="notesType" minOccurs="0"/>
+      <xs:element name="rating" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Does it make sense to use someone else's weather element? It seems like capturing weather in an XML format is a subject that would have already been thought about by others. -->
+  <xs:element name="weather">
+    <xs:annotation>
+      <xs:documentation>The weather element contains information about the weather. This
+        element is intended to be fairly rich so that people who are able to measure
+        various atmospheric quantities precisely will have some place to put that data
+        when recording sky conditions. However, one could always use the notes child
+        element to include an informal description of the weather
+      instead.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="temperature" minOccurs="0"/>
+        <xs:element ref="humidity" minOccurs="0"/>
+        <xs:element ref="pressure" minOccurs="0"/>
+        <xs:element ref="windspeed" minOccurs="0"/>
+        <xs:element name="notes" type="notesType" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="limitingmag">
+    <xs:annotation>
+      <xs:documentation>The limiting-mag element contains the observation of the visual
+        limiting magnitude. The value child element stores a precise observation, obtained
+        using a standard measuring technique, while the notes child element contains an
+        informal description of the limiting magnitude. Note that one of the methods
+        allowed for the value element is "EST", meaning "estimated".</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="value" minOccurs="0">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:float">
+                <xs:attribute name="method" type="magmethods"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="notes" type="notesType" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="seeing">
+    <xs:annotation>
+      <xs:documentation>The seeing element contains, in the notes child element, an
+        informal description of the "seeing" conditions. This is a measure of atmospheric
+        stability as opposed to sky clarity. A future version of this schema may support a
+        way of recording precise seeing information in a value element.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="notes" type="notesType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="temperature">
+    <xs:annotation>
+      <xs:documentation>The temperature element contains a recording if the air
+        temperature at the time of the observation. The value child element contains a
+        precise measurement of the temperature and the notes child element contains an
+        informal description of the temperature.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="value" minOccurs="0">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:float">
+                <xs:attribute name="units" type="tempunits"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="notes" type="notesType" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="humidity">
+    <xs:annotation>
+      <xs:documentation>The humidity element contains a recording if the relative humidity
+        at the time of the observation. The value child element contains a precise
+        measurement of the humidity and the notes child element contains an informal
+        description of the humidity.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="value" minOccurs="0">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:float">
+                <xs:attribute name="units" type="humidityunits"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="notes" type="notesType" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="pressure">
+    <xs:annotation>
+      <xs:documentation>The pressure element contains a recording if the atmospheric
+        pressure at the time of the observation. The value child element contains a
+        precise measurement of the pressure and the notes child element contains an
+        informal description of the pressure.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="value" minOccurs="0">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:float">
+                <xs:attribute name="units" type="pressureunits"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="notes" type="notesType" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="windspeed">
+    <xs:annotation>
+      <xs:documentation>The wind-speed element contains a recording if the wind speed and
+        direction at the time of the observation. The value child element contains a
+        precise measurement of the wind speed and the notes child element contains an
+        informal description of the wind speed.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="value" minOccurs="0">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:float">
+                <xs:attribute name="units" type="windspeedunits"/>
+                <xs:attribute name="direction" type="winddirectionunits"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="notes" type="notesType" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Simple type definitions -->
+  <xs:simpleType name="magmethods">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="IMO"/>
+      <xs:enumeration value="EST"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="tempunits">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="F"/>
+      <xs:enumeration value="C"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="humidityunits">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="%"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="pressureunits">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="mmHg"/>
+      <xs:enumeration value="inHg"/>
+      <xs:enumeration value="kPas"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="windspeedunits">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="mph"/>
+      <xs:enumeration value="kph"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="winddirectionunits">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="N"/>
+      <xs:enumeration value="NNE"/>
+      <xs:enumeration value="NE"/>
+      <xs:enumeration value="ENE"/>
+      <xs:enumeration value="E"/>
+      <xs:enumeration value="ESE"/>
+      <xs:enumeration value="SE"/>
+      <xs:enumeration value="SSE"/>
+      <xs:enumeration value="S"/>
+      <xs:enumeration value="SSW"/>
+      <xs:enumeration value="SW"/>
+      <xs:enumeration value="WSW"/>
+      <xs:enumeration value="W"/>
+      <xs:enumeration value="WNW"/>
+      <xs:enumeration value="NW"/>
+      <xs:enumeration value="NNW"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

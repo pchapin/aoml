@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <!-- FILE      : AENS-requirements.html
+     AUTHOR      : Peter C. Chapin
+     LAST REVISED: 2004-03-12
+     SUBJECT     : Astronomical Event Notification Service Requirements -->
+
+  <head>
+    <meta name="Author" content="Peter C. Chapin" />
+    <meta name="ROBOTS" content="NOARCHIVE" />
+
+    <title>AENS Requirements</title>
+  </head>
+
+  <body>
+    <h1>AENS Requirements</h1>
+    <hr />
+
+    <p>This document describes the requirements for my Astronomical Event Notification Service
+      (AENS). The contents of this document are subject to rapid change and should only be
+      considered approximate.</p>
+
+    <p>Astronomical events will be stored in files marked up with Astronomical Event Markup
+      Language (AEML). These event files will be styled for web presentation as well as serve as
+      the source of events for the notification service. AEML can and will be adapted to suit
+      the needs of both the notification service and web presentation.</p>
+
+    <p>Subscribers indicate their desire to receive notification of upcoming astronomical events
+      by filling out a suitable web form. The script that backs that form enters their
+      information into a database. Initially I'd like to use a simple text file (an XML
+      document?) for this database. I want to avoid the extra complications of setting up and
+      dealing with a database server at this point. Since the number of subscribers is likely to
+      be small at first I believe this simplification is reasonable. Eventually, however, it may
+      be desirable to back the subscriber list with a full-powered relational database
+      server.</p>
+
+    <p>The notification service will run periodically and send out notifications of events to
+      subscribers. Initially I will fix the notification time at, for example, 2 days. The
+      service would thus send out notifications between 48 and 72 hours (2 and 3 days) before
+      the event actually occurs. Since the service does not run continuously it follows that
+      notifications must be sent during an interval around the specified notification time. I
+      obviously don't want to send notifications too late but I also don't want to send them too
+      early. The one day interval is a compromise.</p>
+
+    <p>I plan to run the service every 24 hours. However, the exact time of day when the service
+      runs is not relevant. I'm assuming that subscribers are in all time zones so the concepts
+      of "night" and "day" are, in general, meaningless. For example it doesn't make sense to
+      try and run the service at night so that people have notifications waiting for them in the
+      morning. What constitutes night at my location might be the middle of the afternoon for
+      some subscribers. However, by running the service only once per day, I ensure that no
+      subscribers anywhere will receive more than one email message per day from the service. I
+      feel that is important. Also another consequence of this policy is that all internal
+      date/time calculations have to be done using universal time.</p>
+
+    <p>Eventually I'd like to allow subscribers to specify their desired notification time as
+      well as the type and "level" (advanced, novice, etc) of the events for which they want to
+      be notified. Although I don't plan on implementing these features at first, they do have
+      some implications for the system's design. In particular, the subscriber database needs to
+      keep track of which events each subscriber has been notified of. Under no circumstances do
+      I want to send a user multiple notifications for the same event (this isn't supposed to be
+      a spamming engine). This in turn implies that events need to have unique ID numbers.
+      Currently AEML requires a unique ID number on every event in a document. Thus the tuple
+      (document-file-name, ID) should be unique across all events.</p>
+
+    <p>The basic pseudo-code for the notification service is</p>
+
+    <pre>
+FOR &lt;each user in the subscriber database&gt; LOOP
+  FOR &lt;each event in the current event list&gt; LOOP
+    IF &lt;The user has not been notified about this event&gt; THEN
+      &lt;Add this event to the current notification message&gt;
+      &lt;Mark that the user has been notified about this event&gt;
+    END
+  END
+  &lt;Send the user the current notification message (if not empty)&gt;
+END
+</pre>
+
+    <p>This pseudo-code causes a single message to be sent to the subscriber even if there are
+      multiple events active. This is the desired effect. Since every subscriber gets a
+      customized message (due to eventual differences in configuration) it is necessary to
+      reprocess the event list for each subscriber. I could imagine this being done with
+      multiple SAX-style passes over the event list, but loading the event list into a DOM tree
+      might make more sense.</p>
+
+    <p>I'm anticipate keeping the event lists in files on a per-month basis. I think that is a
+      good compromise between file size and number of files. It does mean that the notification
+      service will have to load and consider two different event files occasionally. For
+      example during the last few days of the month the system will have to look at the next
+      month's file as well as the current month's to be sure to notify subscribers of events
+      taking place during the first few days of the upcoming month. In general, once subscribers
+      can change their notification time, the system will have to look forward an arbitrary
+      amount, loading (or scanning) multiple event lists to cover all possible cases. This seems
+      bothersomely complex.</p>
+
+    <p>It would be interesting to build this entire system a second time, using a relational
+      database to hold event information and then compare the two techniques. I doubt I'll have
+      the time to do that anytime soon.</p>
+
+    <hr />
+    <address>
+      &copy; Copyright 2004 by Peter C. Chapin<br />
+      Last Revised: <b>March 12, 2004</b>
+    </address>
+  </body>
+</html>

@@ -1,0 +1,414 @@
+<?xml version="1.0"?>
+<!-- FILE        : LibObject.xsd
+     LAST REVISED: 2021-11-16
+     AUTHOR      : (C) Copyright by Peter Chapin
+     SUBJECT     : Object library for AOML.
+
+This schema defines the various astronomical object types used by AOML.
+
+TO DO
+
++ ...
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" elementFormDefault="qualified"
+  xml:lang="en-US">
+
+  <xs:complexType name="objectType">
+    <xs:annotation>
+      <xs:documentation>
+        <p xmlns="http://www.w3.org/1999/xhtml">This type contains information about an
+          astronomical object for which observations are described or which is used within
+          the observation. This type requires at least one name or id element that
+          identifies the object.</p>
+        <p>An example of the content of an object element for the Beehive Open Cluster.</p>
+        <pre xmlns="http://www.w3.org/1999/xhtml"><![CDATA[
+<object>
+    <id catalog="M" id="44"/>
+    <id catalog="NGC" id="2632"/>
+    <name>Praesepe</name>
+    <name>Beehive Cluster</name>
+    <type>cluster/open</type>
+</object>]]></pre>
+        <p xmlns="http://www.w3.org/1999/xhtml">We imagine that most (if not all) of the
+          data contained in the object element can be automatically inserted by the
+          editing program.</p>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="name" type="xs:token">
+          <xs:annotation>
+            <xs:documentation>
+              <p xmlns="http://www.w3.org/1999/xhtml">The name of the object. Names can be
+                common names such as <i>Rigel</i>, <i>Beta Ori</i> or <i>The Orion
+                Nebula</i>. Identifiers such as <i>M-44</i> are not names even though they
+                are often used as such. Use the &lt;id&gt; element for these
+                identifiers.</p>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="id" type="objectIDType">
+          <xs:annotation>
+            <xs:documentation>
+              <p xmlns="http://www.w3.org/1999/xhtml">An identifier of the object such as
+                  <i>HD 34085</i> or <i>M-44</i>.</p>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+      <xs:element name="type" type="objectTypeType" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            <p xmlns="http://www.w3.org/1999/xhtml">The type of object, such as star or
+              planet. This element is not required as it is not necessary for object
+              identification. Multiple type elements can be used instead of one.</p>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="position" type="positionType" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            <p xmlns="http://www.w3.org/1999/xhtml">The position of the object in the
+              celestial sphere. The position does not have to be valid for the same epoch
+              (date/time) as the observation, but can be of a different epoch.</p>
+            <p> Multiple positions can be provided for one object. You can define
+              different positions for the different coordinate systems, such as one for
+              the equatorial system and another for the galactic system. Or one can have
+              different positions for different epochs, this can be important when one has
+              one position (of a planet) for 0h00 UT and one for 24h00 UT and the
+              observation is done at 12h00 UT.</p>
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="constellation" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The constellation element contains the standard name of the
+            constellation where the object is located.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="reference" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The reference element contains a string specifying the source
+            of the data on the object. Most of the data is actually presented in elements
+            added by derived types and appears below this element. However, this element
+            is defined in objectType since it is shared by all object
+          types.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- end objectType -->
+
+  <!-- ===== Derived Types ===== -->
+  <xs:complexType name="starMultipleObjectType">
+    <xs:annotation>
+      <xs:documentation>
+        <p xmlns="http://www.w3.org/1999/xhtml">This type contains elements that hold
+          specialized information about multiple stars.</p>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="objectType">
+        <xs:sequence>
+          <!-- First specify components. There could be more than two. -->
+          <xs:element name="component" minOccurs="2" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>This element contains information about one component of
+                the multiple star. More than two components are possible. Each component
+                must be given a designation (typically a single upper case letter with 'A'
+                being assigned to the brightest component) that can be used with the
+                separation and position-angle elements.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="magnitude" type="magnitudeType" minOccurs="0"/>
+                <xs:element name="spectral-class" type="xs:string" minOccurs="0"/>
+              </xs:sequence>
+              <xs:attribute name="designation" type="xs:token" use="required"/>
+            </xs:complexType>
+          </xs:element>
+          <!-- Now specify various separations. -->
+          <xs:element name="separation" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+              <xs:documentation>This element specifies the separation, in arcseconds, and
+                position angle, in degrees, between two components of the multiple star.
+                Because more than two components are possible, the two for which a given
+                separation applies must be specified.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:attribute name="designation-1" type="xs:token" use="required"/>
+              <xs:attribute name="designation-2" type="xs:token" use="required"/>
+              <xs:attribute name="distance" type="xs:float"/>
+              <xs:attribute name="PA" type="xs:float"/>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- end starMultipleObjectType -->
+  
+  <xs:complexType name="starVariableObjectType">
+    <xs:annotation>
+      <xs:documentation>
+        <p xmlns="http://www.w3.org/1999/xhtml">This type contains elements that hold
+          specialized information about variable stars.</p>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="objectType">
+        <xs:sequence>
+          <!-- First specify the brightness range of the variable. -->
+          <xs:element name="range">
+            <xs:annotation>
+              <xs:documentation>This element contains information about the brightness range
+                of the variable star. The 'min' and 'max' attributes give the minimum
+                brightness and the maximum brightness, respectively.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:attribute name="min" type="xs:float" use="required"/>
+              <xs:attribute name="max" type="xs:float" use="required"/>
+            </xs:complexType>      
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <!-- end starVariableObjectType -->
+
+  <!-- ===== Supporting Complex Types ===== -->
+  <xs:complexType name="objectIDType">
+    <xs:annotation>
+      <xs:documentation>
+        <p xmlns="http://www.w3.org/1999/xhtml">This type requires two attributes, one
+          identifying the catalog from which this id is taken (ex. HD) and the id within
+          that catalog (ex. 34085).</p>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="catalog" type="xs:token" use="required"/>
+    <xs:attribute name="id" type="xs:token" use="required"/>
+  </xs:complexType>
+  <!-- end objectIDType -->
+
+  <xs:complexType name="positionType">
+    <xs:annotation>
+      <xs:documentation>The position type contains one or more of the following elements:
+        &lt;equatorial&gt; containing an equatorial position,
+        &lt;galactic&gt; containing a galactic position,
+        &lt;ecliptical&gt; containing an ecliptical position,
+        &lt;azimuthal&gt; containing an azimuthal position, and
+        &lt;extra-galactic&gt; containing an extra-galactic
+      position.</xs:documentation>
+    </xs:annotation>
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="equatorial" type="equatorialSystemType"/>
+      <xs:element name="galactic" type="lonlatSystemType"/>
+      <xs:element name="extra-galactic" type="lonlatSystemType"/>
+      <xs:element name="ecliptical" type="lonlatSystemType"/>
+      <xs:element name="azimuthal" type="azimuthalSystemType"/>
+    </xs:choice>
+  </xs:complexType>
+  <!-- end positionType -->
+
+  <!-- ===== Coordinate Systems ===== -->
+  <xs:complexType name="equatorialSystemType">
+    <xs:annotation>
+      <xs:documentation>
+        <p xmlns="http://www.w3.org/1999/xhtml">An equatorial postition is defined by it
+          right ascension and declination for a certain equinox.</p>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="right-ascension" type="raType" use="required">
+      <xs:annotation>
+        <xs:documentation>The right ascension of the equatorial
+        position.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="declination" type="latitudeType" use="required">
+      <xs:annotation>
+        <xs:documentation>The declination of the equatorial position.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="equinox" type="equinoxType" default="J2000.0">
+      <xs:annotation>
+        <xs:documentation> The reference equinox at which the position is valid. The
+          default value is J2000.0.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="epoch" type="xs:dateTime" use="optional">
+      <xs:annotation>
+        <xs:documentation> The epoch (or date and time) at which the position is
+        valid.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <!-- end equatorialSystemType -->
+
+  <xs:complexType name="lonlatSystemType">
+    <xs:annotation>
+      <xs:documentation>A galactic, extra-galactic, or ecliptical position is defined by
+        its longitude and latitude. No equinox information is necessary because this system
+        is not subject to precession.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="longitude" type="longitudeType" use="required">
+      <xs:annotation>
+        <xs:documentation>The longitude of the position.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="latitude" type="latitudeType" use="required">
+      <xs:annotation>
+        <xs:documentation>The latitude of the position.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="epoch" type="xs:dateTime" use="optional">
+      <xs:annotation>
+        <xs:documentation>The epoch (or date and time) at which the position is
+        valid.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <!-- end lonlatSystemType -->
+  <xs:complexType name="azimuthalSystemType">
+    <xs:annotation>
+      <xs:documentation>An azimuthal position is defined by it azimuth along the horizon
+        and altitude above the horizon. Epoch and geographical location are necessary to
+        convert to other co-ordinate systems. Without them the position is
+      meaningless.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <!-- Here an element for geographical location should be added. -->
+    </xs:sequence>
+    <xs:attribute name="azimuth" type="longitudeType" use="required">
+      <xs:annotation>
+        <xs:documentation>The azimuth of the position measured from north (0 deg) through
+          east (90 deg), south (180 deg), and west (270 deg).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="altitude" type="latitudeType" use="required">
+      <xs:annotation>
+        <xs:documentation>The altitude of the position. 0 degrees is on the horizon, +90
+          degrees in the zenith.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="epoch" type="xs:dateTime" use="required">
+      <xs:annotation>
+        <xs:documentation>The epoch (or date and time) at which the position is
+        valid.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <!-- end azmuthalSystemType -->
+
+  <!-- ===== Supporting Simple Types ===== -->
+  <xs:simpleType name="raType">
+    <xs:annotation>
+      <xs:documentation>The right ascension has the hour-minute-second format. Valid
+        examples are: 22h12m43s, 05h, 05.5h, 00h32m, 12h37.1m, 15h31m59.879s. Non-valid
+        examples: 24h, 14h92m, and 4h45m12s.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern
+        value="(([0-1][0-9])|(2[0-3]))(\.[0-9]+)?h([0-5][0-9](\.[0-9]+)?m([0-5][0-9](\.[0-9]+)?s)?)?"
+      />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- end raType -->
+
+  <xs:simpleType name="longitudeType">
+    <xs:annotation>
+      <xs:documentation>A longitude angle between 0 degrees and 360 degrees in the degree,
+        arcminute, arcsecond format. The symbols d, m, and s are used for degree,
+        arcminute, and arcsecond respectively. Valid examples are: 243d45m12.3244s,
+        003d23m, and 067d. Non-valid are: 542d, 398d. and -023d</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern
+        value="(([0-2][0-9])|(3[0-5]))[0-9](\.[0-9]+)?d([0-5][0-9](\.[0-9]+)?m([0-5][0-9](\.[0-9]+)?s)?)?"
+      />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- end longitudeType -->
+
+  <xs:simpleType name="latitudeType">
+    <xs:annotation>
+      <xs:documentation>A latitude angle between -90 degrees and +90 degrees in the
+        degree, arcminute, arcsecond format. The symbols d, m, and s are used for degree,
+        arcminute, and arcsecond respectively. Valid examples are: -76d56m12.12s, +89d,
+        and -05d12m. Non-valid examples are: +95d, -54d98m, and +3d.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern
+        value="(\+|-)[0-8][0-9](\.[0-9]+)?d([0-5][0-9](\.[0-9]+)?m([0-5][0-9](\.[0-9])?s)?)?"
+      />
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- end latitudeType -->
+
+  <xs:simpleType name="equinoxType">
+    <xs:annotation>
+      <xs:documentation>The equinox given for positions uses one of two systems, the
+        Besselian (before 1984) or the Julian system. Valid values are: B1900.0, B1950.0,
+        J2000.0, J2050.0, or J2003.2322.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:pattern value="(J|B)[0-9]{4}\.[0-9]*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- end equinoxType -->
+
+  <xs:simpleType name="objectTypeType">
+    <xs:annotation>
+      <xs:documentation>The type of object. It can contain only one of the elements from
+        the enumeration.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="cluster"/>
+      <xs:enumeration value="cluster/galaxy"/>
+      <xs:enumeration value="cluster/globular"/>
+      <xs:enumeration value="cluster/open">
+        <xs:annotation>
+          <xs:documentation>galactic cluster</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="comet"/>
+      <xs:enumeration value="galaxy"/>
+      <xs:enumeration value="moon"/>
+      <xs:enumeration value="nebula"/>
+      <xs:enumeration value="nebula/dark"/>
+      <xs:enumeration value="nebula/emission"/>
+      <xs:enumeration value="nebula/reflection"/>
+      <xs:enumeration value="nebula/planetary"/>
+      <xs:enumeration value="planet"/>
+      <xs:enumeration value="planet/minor"/>
+      <xs:enumeration value="quasar"/>
+      <xs:enumeration value="radio"/>
+      <xs:enumeration value="radio/pulsar"/>
+      <xs:enumeration value="satelite"/>
+      <xs:enumeration value="sun"/>
+      <xs:enumeration value="star"/>
+      <xs:enumeration value="star/multiple"/>
+      <xs:enumeration value="star/variable"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- end objectTypeType -->
+
+  <xs:simpleType name="magnitudeNamesType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="var"/>
+      <xs:enumeration value="unknown"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- end magnitudeNamesType -->
+
+  <xs:simpleType name="magnitudeRangeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[+\-]?[0-9]+(\.[0-9]+)?-[+\-]?[0-9]+(\.[0-9]+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="magnitudeType">
+    <xs:union memberTypes="magnitudeNamesType magnitudeRangeType xs:float"/>
+  </xs:simpleType>
+  <!-- end magnitudeType -->
+
+</xs:schema>

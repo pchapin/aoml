@@ -1,0 +1,355 @@
+<?xml version="1.0"?>
+<!-- FILE        : LibType.xsd
+     LAST REVISED: 2003-08-28
+     AUTHOR      : (C) Copyright by Peter Chapin
+     SUBJECT     : Type library for AOML.
+
+This is a utility schema that defines a number of types that are used by AOML.
+
+TO DO
+
++ ...
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" elementFormDefault="qualified"
+  xml:lang="en-US">
+  <!-- The following dateTimeType is currently used by AEML. It's unclear if they should be retained for general use or removed in favor of the absoluteDateTimeType and localDateTimeType defined below (and used by AOML). For now, I'm content to let these types remain. -->
+
+  <xs:complexType name="dateTimeType">
+    <xs:annotation>
+      <xs:documentation>The dateTimeType treats dates and times as a single concept. Such
+        an integrated approach is necessary in general since in some contexts a moment in
+        time must be uniquely specified when compared with other moments that are days or
+        even years away. Yet despite this there are other contexts when dates and times
+        need to be considered separately. Thus this type specifies individual date and
+        time child elements. Notice that the timezone attribute is on the overall type and
+        not just the time child element. This is because the timezone affects the way both
+        date and times are interpreted; it isn't just associated with the time
+      alone.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="date" type="xs:date" minOccurs="0"/>
+      <xs:element name="time" type="timeType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="timezone" type="TZtype"/>
+  </xs:complexType>
+
+  <xs:simpleType name="timeType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(([0-1][0-9])|(2[0-3]))(:[0-5][0-9])?(:[0-5][0-9])?"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="TZnums">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[+\-][0-9]{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="TZnames">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="local"/>
+      <xs:enumeration value="UTC"/>
+      <xs:enumeration value="AST"/>
+      <xs:enumeration value="EST"/>
+      <xs:enumeration value="CST"/>
+      <xs:enumeration value="MST"/>
+      <xs:enumeration value="PST"/>
+      <xs:enumeration value="ADT"/>
+      <xs:enumeration value="EDT"/>
+      <xs:enumeration value="CDT"/>
+      <xs:enumeration value="MDT"/>
+      <xs:enumeration value="PDT"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="TZtype">
+    <xs:union memberTypes="TZnums TZnames"/>
+  </xs:simpleType>
+
+  <!-- End of dateTimeType definition (and supporting simple types). -->
+
+  <xs:complexType name="locationType">
+    <xs:annotation>
+      <xs:documentation>Elements with locationType may contain both a formal (precise) and
+        informal description of a location. The intent of the notes child element is to
+        hold the informal description. The value child element is intended to hold a more
+        precise locator. Notice that both are currently optional making an empty location
+        element legal.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="value" minOccurs="0">
+        <xs:complexType>
+          <xs:choice>
+            <xs:element name="lat-long-alt" type="iso6709_LatLongAlt"/>
+            <xs:sequence>
+              <xs:element name="latitude" type="iso6709_Lat"/>
+              <xs:element name="longitude" type="iso6709_Long"/>
+              <xs:element name="altitude" type="iso6709_Alt" minOccurs="0"/>
+            </xs:sequence>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="notes" type="notesType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="iso6709_Lat">
+    <xs:restriction base="xs:string">
+      <xs:pattern
+        value="([+\-][0-9]{2}(\.[0-9]{2})?|[+\-][0-9]{2}[0-5][0-9](\.[0-9]{3})?|[+\-][0-9]{2}[0-5][0-9][0-5][0-9](\.[0-9]{2})?)"
+      />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="iso6709_Long">
+    <xs:restriction base="xs:string">
+      <xs:pattern
+        value="([+\-][0-9]{3}(\.[0-9]{2})?|[+\-][0-9]{3}[0-5][0-9](\.[0-9]{2})?|[+\-][0-9]{3}[0-5][0-9][0-5][0-9](\.[0-9]{2})?)"
+      />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="iso6709_Alt">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([+\-][0-9]+(\.[0-9]+)?)"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="iso6709_LatLongAlt">
+    <xs:restriction base="xs:string">
+      <xs:pattern
+        value="([+\-][0-9]{2}(\.[0-9]{2})?|[+\-][0-9]{2}[0-5][0-9](\.[0-9]{3})?|[+\-][0-9]{2}[0-5][0-9][0-5][0-9](\.[0-9]{2})?)([+\-][0-9]{3}(\.[0-9]{2})?|[+\-][0-9]{3}[0-5][0-9](\.[0-9]{2})?|[+\-][0-9]{3}[0-5][0-9][0-5][0-9](\.[0-9]{2})?)([+\-][0-9]+(\.[0-9]+)?)?"
+      />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="observerType">
+    <xs:annotation>
+      <xs:documentation>Elements with observerType are currently just strings intended to
+        hold the observer's name or any other "reasonable" identifier. It is currently not
+        clear that any more structure is necessary.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="equipmentType">
+    <xs:annotation>
+      <xs:documentation>Elements with equipmentType are used to describe observing
+        equipment. Currently such elements only contain notes. In the future they may
+        allow for more elaborate structuring of equipment information.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="notes" type="notesType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="notesType">
+    <xs:annotation>
+      <xs:documentation>Elements with notesType can used in any context to hold
+        "document-like" information. Document authors may want to make extensive use of
+        notes for recording informal content or information that can't be easily captured
+        by the other elements. Some instance documents may be composed almost entirely of
+        notes.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any namespace="http://www.w3.org/1999/xhtml" processContents="lax" minOccurs="0"
+        maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="absoluteDateTimeType">
+    <xs:annotation>
+      <xs:documentation>
+        <p xmlns="http://www.w3.org/1999/xhtml">This type describes a moment in time. Its
+          content is several mutually exclusive options for representing dates and times.
+          The options are described as follows.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>JD</b>: The Julian Date as a decimal value. The JD is defined in terms of
+          date/time at 0 degrees of longitude. Thus it is not necessary to include
+          specific time zone information.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>ISO</b>: The full date and time. This element is the same as xs:dateTime
+          except that the time zone information is required.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>date</b>: The date alone in ISO format. This element is the same as xs:date
+          except that the time zone information is required. It is intended to be used in
+          an observation set to define a common date for all observations in the
+          observation set.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>time</b>: The time alone in ISO format. This element is the same as xs:time
+          except that the time zone information is <em>prohibited</em>. It is intended to
+          be used in an observation when a date (and time zone) are provided in an
+          enclosing observation set. In that case it inherits the date and time zone from
+          the observation set. Using this element in a case where there is no date and
+          time zone to inherit is undefined.</p>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:element name="JD" type="xs:decimal"/>
+      <xs:element name="ISO" type="ISOdateTimeTypeTZ"/>
+      <xs:element name="date" type="ISOdateTypeTZ"/>
+      <xs:element name="time" type="ISOtimeTypeNTZ"/>
+    </xs:choice>
+    <xs:attribute name="resolution" type="xs:duration"/>
+  </xs:complexType>
+
+  <xs:complexType name="localDateTimeType">
+    <xs:annotation>
+      <xs:documentation>
+        <p xmlns="http://www.w3.org/1999/xhtml">This type describes a time that is only
+          meaningful at a particular location. If an element with localDatetimeType is
+          used, it should only be used in a context where sufficient geographical
+          information is available to properly interpret the local time.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">There are several local time types
+          supported. Use the "type" attribute to specify a particular type. Time zone
+          information is prohibited in all local time formats since, by definition, the
+          time zone is irrelevant for local times. (A local time with a time zone is an
+          absolute time and should be recorded in an element with absoluteDatetypeTime).
+          The following formats are supported for recording any of the local time types.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>ISO</b>: The full date and time. This element is the same as xs:dateTime
+          except that the time zone information is prohibited.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>date</b>: The date alone in ISO format. This element is the same as xs:date
+          except that the time zone information is prohibited. It is intended to be used
+          in an observation set to define a common date for all observations in the
+          observation set.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>time</b>: The time alone in ISO format. This element is the same as xs:time
+          except that the time zone information is prohibited. It is intended to be used
+          in an observation when a date is provided in an enclosing observation set. In
+          that case it inherits the date from the observation set. This element can also
+          be used in a context where a date can be deduced from context or when a data is
+          irrelevant.</p>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:element name="ISO" type="ISOdateTimeTypeNTZ"/>
+      <xs:element name="date" type="ISOdateTypeNTZ"/>
+      <xs:element name="time" type="ISOtimeTypeNTZ"/>
+    </xs:choice>
+    <xs:attribute name="type" type="localTimeType" use="required"/>
+    <xs:attribute name="resolution" type="xs:duration"/>
+  </xs:complexType>
+
+  <xs:complexType name="absoluteDateTimeRangeType">
+    <xs:annotation>
+      <xs:documentation>This type describes a range of absolute times. The start element
+        specifies the earliest time in the range. The end element specifies the latest
+        time in the range. Note that the start and end times can have separate resolutions
+        and different time zones. They might even be in different formats. To be
+        meaningful the start and end times in a range must unambiguously ordered. See the
+        XML schema specification, "Part 2: Datatypes" for more information on ordering
+        date time values.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="start" type="absoluteDateTimeType"/>
+      <xs:element name="end" type="absoluteDateTimeType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="localDateTimeRangeType">
+    <xs:annotation>
+      <xs:documentation>This type describes a range of local times. The start element
+        specifies the earliest time in the range. The end element specifies the latest
+        time in the range. Note that the start and end times can have separate resolutions
+        and different time zones. They might even be in different formats. To be
+        meaningful the start and end times in a range must unambiguously ordered. See the
+        XML schema specification, "Part 2: Datatypes" for more information on ordering
+        date time values.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="start" type="localDateTimeType"/>
+      <xs:element name="end" type="localDateTimeType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="ISOdateTimeTypeTZ">
+    <xs:annotation>
+      <xs:documentation>This restricted form of xs:datetime requires the use of the
+        timezone.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:dateTime">
+      <xs:pattern value="\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?(([+\-]\d\d:\d\d)|Z)"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ISOdateTimeTypeNTZ">
+    <xs:annotation>
+      <xs:documentation>This restricted form of xs:datetime prohibits the use of the
+        timezone.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:dateTime">
+      <xs:pattern value="\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ISOdateTypeTZ">
+    <xs:annotation>
+      <xs:documentation>This restricted form of xs:date requires the use of the
+      timezone.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:date">
+      <xs:pattern value="\d{4}-\d\d-\d\d(([+\-]\d\d:\d\d)|Z)"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ISOdateTypeNTZ">
+    <xs:annotation>
+      <xs:documentation>This restricted form of xs:date prohibits the use of the
+      timezone.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:date">
+      <xs:pattern value="\d{4}-\d\d-\d\d"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ISOtimeTypeNTZ">
+    <xs:annotation>
+      <xs:documentation>This restricted form of xs:time prohibits the use of the
+      timezone.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:time">
+      <xs:pattern value="\d\d:\d\d:\d\d(\.\d+)?"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="localTimeType">
+    <xs:annotation>
+      <xs:documentation>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>LAT</b>: Local Apparent Time. This is the time based on the actual position
+          of the sun. It is non-uniform since the sun moves at different rates across the
+          sky. However, this time is directly observable.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>LMT</b>: Local Mean Time. This is the time based on the motion of a fictional
+          "mean sun" that moves at a uniform rate across the sky. It differs from LAT by
+          the equation of time. Note that LMT varies continuously across a time zone.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>LST</b>: Local Standard Time. This is the local time that is agreed upon by
+          convention. It is constant in a time zone and jumps discontinuously from one
+          time zone to another. This is the time most people use in their day to day
+          lives.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>LDT</b>: Local "Daylight" Time. This is a variation on LST that is used in
+          many places during the summer. It is often called "summer time".</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>LAST</b>: Local Apparent Sidereal Time. This is the RA on meridian. It is
+          directly observable. It differs from LMT because the sidereal day has a
+          different length than the solar day.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml">
+          <b>LMST</b>: Local Mean Sidereal Time. This is LAST after averaging the effects
+          of nutation.</p>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="LAT"/>
+      <xs:enumeration value="LMT"/>
+      <xs:enumeration value="LST"/>
+      <xs:enumeration value="LDT"/>
+      <xs:enumeration value="LAST"/>
+      <xs:enumeration value="LMST"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
