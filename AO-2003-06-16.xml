@@ -36,7 +36,7 @@
 
 <?xml-stylesheet type="text/xsl" href="AOML/AOML.xsl"?>
 
-<observation-set xmlns="http://www.pchapin.org/XML/AOML"
+<observation-set xmlns="https://www.pchapin.org/XML/AOML"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
@@ -56,7 +56,7 @@
       <xhtml:p>US-Vermont-Tunbridge</xhtml:p>
     </notes>
   </location>
-  <observer>Peter C. Chapin</observer>
+  <observer>Peter Chapin</observer>
   <equipment>
     <notes>
       <xhtml:p>75mm Unitron refractor with the following eyepieces: 25mm (48x), 18mm (67x),

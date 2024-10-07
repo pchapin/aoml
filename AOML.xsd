@@ -15,8 +15,8 @@ TO DO
 + Multitudes of other things.
 -->
 
-<xs:schema targetNamespace="http://www.pchapin.org/XML/AOML"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.pchapin.org/XML/AOML"
+<xs:schema targetNamespace="https://www.pchapin.org/XML/AOML"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.pchapin.org/XML/AOML"
   elementFormDefault="qualified" xml:lang="en-US">
 
   <xs:annotation>

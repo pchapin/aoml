@@ -17,7 +17,7 @@ TO DO:
   respect to limiting magnitude and seeing, etc).
 -->
 
-<xsl:stylesheet version="1.0" xmlns:aoml="http://www.pchapin.org/XML/AOML"
+<xsl:stylesheet version="1.0" xmlns:aoml="https://www.pchapin.org/XML/AOML"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
