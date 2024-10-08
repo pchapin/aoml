@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 
 <!-- FILE        : sky.xsl
-     LAST REVISED: 2020-11-19
-     AUTHOR      : (C) Copyright 2020 by Peter Chapin
-     SUBJECT     : Style sheet to convert sky.xsd into an HTML table.
+     LAST REVISED: 2024-10-08
+     AUTHOR      : (C) Copyright 2024 by Peter Chapin
+     SUBJECT     : Style sheet to convert AOML sky conditions into XHTML.
      
 TO DO:
 
@@ -17,12 +17,16 @@ TO DO:
   respect to limiting magnitude and seeing, etc).
 -->
 
-<xsl:stylesheet version="1.0" xmlns:aoml="https://www.pchapin.org/XML/AOML"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<xsl:stylesheet version="1.0"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:aoml="https://www.pchapin.org/XML/AOML"
+                exclude-result-prefixes="aoml">
 
-  <xsl:output method="html"/>
+  <xsl:output method="xml"
+    doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
+    doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+    indent="yes"/>
 
   <xsl:template match="aoml:observation-set">
     <html lang="en-US">
@@ -34,35 +38,33 @@ TO DO:
         <h1>Sky Conditions</h1>
         <hr/>
         <xsl:if test="aoml:localdatetime">
-          <p>Default datetime: <u>
+          <p>Default datetime:
               <xsl:value-of select="aoml:localdatetime/aoml:ISO"/>
-            </u></p>
+            </p>
         </xsl:if>
         <xsl:if test="aoml:location">
-          <p>Default location: <u>
-              <xsl:value-of select="aoml:location/aoml:notes/xhtml:p[1]"/>
-            </u></p>
+          <p>Default location:
+              <xsl:value-of select="aoml:location/aoml:notes/p[1]"/>
+            </p>
         </xsl:if>
         <xsl:if test="aoml:observer">
-          <p>Default observer: <u>
+          <p>Default observer:
               <xsl:value-of select="aoml:observer"/>
-            </u></p>
+            </p>
         </xsl:if>
         <xsl:if test="aoml:notes">
-          <xsl:value-of select="aoml:notes"/>
+          <p><xsl:value-of select="aoml:notes/p[1]"/></p>
         </xsl:if>
 
-        <p>
-          <table border="1">
-            <tr>
-              <th width="80">Date</th>
-              <th>Time</th>
-              <th>Weather Summary</th>
-              <th>Sky Conditions Summary</th>
-            </tr>
-            <xsl:apply-templates select="aoml:observation"/>
-          </table>
-        </p>
+        <table border="1">
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Weather Summary</th>
+            <th>Sky Conditions Summary</th>
+          </tr>
+          <xsl:apply-templates select="aoml:observation"/>
+        </table>
 
         <p>For more information on the rating system I use see <a href="sky-codes.xhtml">
             <i>sky-codes</i>
@@ -106,7 +108,7 @@ TO DO:
           /><xsl:text> </xsl:text><xsl:value-of select="aoml:temperature/aoml:value/@units"/></b>
       <xsl:if test="aoml:temperature/aoml:notes"
           ><xsl:text> (</xsl:text><i>NOTE:</i><xsl:text> </xsl:text><xsl:value-of
-          select="aoml:temperature/aoml:notes/xhtml:p[1]"/>)</xsl:if>
+          select="aoml:temperature/aoml:notes/p[1]"/>)</xsl:if>
       <br/>
     </xsl:if>
 
@@ -115,7 +117,7 @@ TO DO:
           /><xsl:text> </xsl:text><xsl:value-of select="aoml:pressure/aoml:value/@units"/></b>
       <xsl:if test="aoml:pressure/aoml:notes"
           ><xsl:text> (</xsl:text><i>NOTE:</i><xsl:text> </xsl:text><xsl:value-of
-          select="aoml:pressure/aoml:notes/xhtml:p[1]"/>)</xsl:if>
+          select="aoml:pressure/aoml:notes/p[1]"/>)</xsl:if>
       <br/>
     </xsl:if>
 

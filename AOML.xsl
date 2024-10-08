@@ -39,8 +39,8 @@
 ]>
 
 <!-- FILE    : AOML.xsl
-     AUTHOR  : (C) Copyright 2020 by Peter Chapin
-     SUBJECT : Style sheet to convert astronomical observations into HTML.
+     AUTHOR  : (C) Copyright 2024 by Peter Chapin
+     SUBJECT : Style sheet to convert AOML into HTML.
      
 TO DO:
 
@@ -51,13 +51,18 @@ TO DO:
 
 -->
 
-<xsl:stylesheet version="1.0" xmlns:aoml="http://www.pchapin.org/XML/AOML"
+<xsl:stylesheet version="1.0"
+  xmlns="http://www.w3.org/1999/xhtml"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
-
-  <xsl:output method="xml"/>
-
+  xmlns:aoml="https://www.pchapin.org/XML/AOML"
+  exclude-result-prefixes="xsi aoml">
+  
+  <xsl:output method="xml"
+    doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
+    doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+    indent="yes"/>
+  
   <xsl:template match="aoml:entry-set">
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
       <head>
@@ -79,7 +84,7 @@ TO DO:
 
 
   <xsl:template match="aoml:observation-set">
-    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+    <html lang="en-US">
       <head>
         <!-- Probably eventually the title should come from the AOML document. -->
         <title>Observations</title>
@@ -105,7 +110,7 @@ TO DO:
         <table>
           <xsl:if test="aoml:datetime">
             <tr>
-              <td width="80" valign="top">
+              <td valign="top">
                 <b>Date/Time</b>
               </td>
               <td valign="top">:</td>
@@ -116,7 +121,7 @@ TO DO:
           </xsl:if>
           <xsl:if test="aoml:datetimerange">
             <tr>
-              <td width="80" valign="top">
+              <td valign="top">
                 <b>Date/Time</b>
               </td>
               <td valign="top">:</td>
@@ -127,7 +132,7 @@ TO DO:
           </xsl:if>
           <xsl:if test="aoml:observer">
             <tr>
-              <td width="80" valign="top">
+              <td valign="top">
                 <b>Observer</b>
               </td>
               <td valign="top">:</td>
@@ -138,23 +143,23 @@ TO DO:
           </xsl:if>
           <xsl:if test="aoml:equipment">
             <tr>
-              <td width="80" valign="top">
+              <td valign="top">
                 <b>Equipment</b>
               </td>
               <td valign="top">:</td>
               <td>
-                <xsl:value-of select="aoml:equipment/aoml:notes/xhtml:p[1]"/>
+                <xsl:value-of select="aoml:equipment/aoml:notes/p[1]"/>
               </td>
             </tr>
           </xsl:if>
           <xsl:if test="aoml:location">
             <tr>
-              <td width="80" valign="top">
+              <td valign="top">
                 <b>Location</b>
               </td>
               <td valign="top">:</td>
               <td>
-                <xsl:value-of select="aoml:location/aoml:notes/xhtml:p[1]"/>
+                <xsl:value-of select="aoml:location/aoml:notes/p[1]"/>
               </td>
             </tr>
           </xsl:if>
@@ -162,7 +167,9 @@ TO DO:
 
         <xsl:if test="aoml:notes">
           <xsl:for-each select="aoml:notes/*">
-            <xsl:copy-of select="."/>
+            <xsl:element name="p" namespace="http://www.w3.org/1999/xhtml">
+              <xsl:apply-templates select="node()"/>
+            </xsl:element>
           </xsl:for-each>
         </xsl:if>
 
@@ -206,7 +213,9 @@ TO DO:
 
     <xsl:if test="aoml:notes">
       <xsl:for-each select="aoml:notes/*">
-        <xsl:copy-of select="."/>
+        <xsl:element name="p" namespace="http://www.w3.org/1999/xhtml">
+          <xsl:apply-templates select="node()"/>
+        </xsl:element>
       </xsl:for-each>
     </xsl:if>
   </xsl:template>
@@ -340,3 +349,55 @@ TO DO:
   </xsl:template>
 
 </xsl:stylesheet>
+
+<!--
+
+After having a conversation with ChatGPT, it suggested the following approach. Here
+an AOML element containing XHTML uses a template that regenerates XHTML elements (in
+the right namespace) recursively.
+
+Here is an example usage...
+
+<xsl:if test="aoml:notes">
+  <xsl:for-each select="aoml:notes/*">
+    <xsl:apply-templates select="."/>
+  </xsl:for-each>
+</xsl:if>
+
+Here is a template that handles all elements in the XHTML namespace and reconstructs them.
+
+<xsl:template match="xhtml:*">
+  <xsl:element name="{local-name()}" namespace="http://www.w3.org/1999/xhtml">
+    <xsl:apply-templates select="@* | node()"/>
+  </xsl:element>
+  </xsl:template>
+
+And here is a template that handles attributes in the XHMLT namespace and reconstructs them.
+
+<xsl:template match="@*">
+  <xsl:attribute name="{local-name()}">
+    <xsl:value-of select="."/>
+  </xsl:attribute>
+</xsl:template>
+
+
+ChatGPT showed the following example of how this is supposed to work:
+
+Input from the AOML:
+
+<notes>
+  <xhtml:p>
+    Just after setting up my telescope, 
+    <xhtml:span style="color:red;">it started to rain</xhtml:span>.
+  </xhtml:p>
+</notes>
+
+Generated (and reconstructed) ouput. Note the correct handling of the nexted <span> element.
+
+<p xmlns="http://www.w3.org/1999/xhtml">
+  Just after setting up my telescope, 
+  <span style="color:red;">it started to rain</span>.
+</p>
+
+
+-->

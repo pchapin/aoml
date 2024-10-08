@@ -2,10 +2,9 @@
 
 <!--
      FILE        : events.xsl
-     LAST REVISED: 2020-11-19
-     AUTHOR      : Peter Chapin
-
-This file contains a stylesheet suitable for converting aoml into HTML. 
+     LAST REVISED: 2024-10-08
+     AUTHOR      : (C) Copyright 2024 by Peter Chapin
+     SUBJECT     : Style sheet to convert AOML events into XHTML. 
 
 TO DO:
 
@@ -13,14 +12,17 @@ TO DO:
 
 -->
 
-<xsl:stylesheet version="1.0" xmlns:aoml="https://www.pchapin.org/XML/AOML"
+<xsl:stylesheet version="1.0"
+  xmlns="http://www.w3.org/1999/xhtml"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
-  <!-- Serialize final results as HTML (not XML). -->
-  <xsl:output method="html"/>
-
+  xmlns:aoml="https://www.pchapin.org/XML/AOML"
+  exclude-result-prefixes="aoml">
+  
+  <xsl:output method="xml"
+    doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
+    doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+    indent="yes"/>
+  
   <!-- This top level template defines the general layout of the document. -->
   <xsl:template match="aoml:eventlist">
     <html>
@@ -211,7 +213,9 @@ TO DO:
         <xsl:attribute name="class">
           <xsl:value-of select="@level"/>
         </xsl:attribute>
-        <xsl:copy-of select="."/>
+        <xsl:element name="p" namespace="http://www.w3.org/1999/xhtml">
+          <xsl:apply-templates select="node()"/>
+        </xsl:element>
       </li>
     </xsl:for-each>
   </xsl:template>
