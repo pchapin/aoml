@@ -37,23 +37,22 @@ TO DO
     <xs:annotation>
       <xs:documentation>An entry is a mostly free-formatted log entry. The precise content is
         intended to be open ended and entirely up to the observer. The observer can use an entry
-        element to store any kind of log or journal-like information he or she
-        desires.</xs:documentation>
+        element to store any kind of log or journal-like information they desire.</xs:documentation>
     </xs:annotation>
   </xs:element>
 
   <xs:element name="entry-set" type="entrySetType">
     <xs:annotation>
-      <xs:documentation>An entry set is a wrapper around multiple entry elements. It is provided
-        for organizational purposes.</xs:documentation>
+      <xs:documentation>An entry set is a wrapper around multiple entry elements. It is provided for
+        organizational purposes.</xs:documentation>
     </xs:annotation>
   </xs:element>
 
   <xs:element name="observation" type="observationType">
     <xs:annotation>
-      <xs:documentation>Observation can be the root element. If so then the file can only
-        contain one observation and all information relevant to that observation should be
-        included in the file under the one observation element.</xs:documentation>
+      <xs:documentation>Observation can be the root element. If so then the file can only contain
+        one observation and all information relevant to that observation should be included in the
+        file under the one observation element.</xs:documentation>
     </xs:annotation>
   </xs:element>
 
@@ -69,8 +68,8 @@ TO DO
   <xs:complexType name="entryType">
     <xs:annotation>
       <xs:documentation>An entry element represents a single entry in a mostly free formatted
-        observation log. At the moment, the body of the entry is just XHTML text. However, the
-        entry does have a header with a required datetime.</xs:documentation>
+        observation log. At the moment, the body of the entry is just XHTML text. However, the entry
+        does have a header with a required datetime.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:choice>
@@ -92,25 +91,25 @@ TO DO
   <xs:complexType name="entrySetType">
     <xs:annotation>
       <xs:documentation>An entry set is an element that can bind entries or nested entry sets
-        together. The semantics of entry sets are a bit different than for observation sets
-        because there is no notion of "inheritance" involved. That is, a nested entry or entry
-        set does not acquire any of the characteristics of the enclosing entry
-        set.</xs:documentation>
+        together. The semantics of entry sets are a bit different than for observation sets because
+        there is no notion of "inheritance" involved. That is, a nested entry or entry set does not
+        acquire any of the characteristics of the enclosing entry set.</xs:documentation>
     </xs:annotation>
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:choice>
         <xs:element name="entry" type="entryType"/>
         <xs:element name="entry-set" type="entrySetType"/>
+        <xs:element name="observation" type="observationType"/>
+        <xs:element name="observation-set" type="observationSetType"/>
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="observationType">
     <xs:annotation>
-      <xs:documentation>This element contains the relevant data (including observation notes) of
-        one observation. Properties that this observation has in common with other observations
-        may be included in an observation set of which this observation is a
-        part.</xs:documentation>
+      <xs:documentation>This element contains the relevant data (including observation notes) of one
+        observation. Properties that this observation has in common with other observations may be
+        included in an observation set of which this observation is a part.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:choice>
@@ -122,9 +121,9 @@ TO DO
         </xs:element>
         <xs:element name="object-group" minOccurs="0">
           <xs:annotation>
-            <xs:documentation>The object-group element defines a group of closely related
-              objects for which an observation applies. This choice should only be used when a
-              single observation pertains to two or more objects (for example a
+            <xs:documentation>The object-group element defines a group of closely related objects
+              for which an observation applies. This choice should only be used when a single
+              observation pertains to two or more objects (for example a
               conjunction).</xs:documentation>
           </xs:annotation>
           <xs:complexType>
@@ -152,9 +151,9 @@ TO DO
   <xs:complexType name="observationSetType">
     <xs:annotation>
       <xs:documentation>An observation-set is an element that can bind together observations (or
-        observation sets) that have properties such as observed object, or observing equipment
-        in common. The binding properties can be included in this element, followed by the
-        specific observations or sets of observations.</xs:documentation>
+        observation sets) that have properties such as observed object, or observing equipment in
+        common. The binding properties can be included in this element, followed by the specific
+        observations or sets of observations.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:choice minOccurs="0">
@@ -170,9 +169,9 @@ TO DO
       <xs:element name="object" type="objectType" minOccurs="0">
         <xs:annotation>
           <xs:documentation>The object element defines the object for which observations are
-            described within the parent observation-set element. All the observations contained
-            in the observation set are observations of this object unless another object is
-            defined for a specific observation or subset of observations.</xs:documentation>
+            described within the parent observation-set element. All the observations contained in
+            the observation set are observations of this object unless another object is defined for
+            a specific observation or subset of observations.</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name="notes" type="notesType" minOccurs="0"/>
@@ -180,10 +179,10 @@ TO DO
         <xs:choice>
           <xs:element name="observation" type="observationType">
             <xs:annotation>
-              <xs:documentation>Observations can be part of a set of observations, contained in
-                an observation-set element. Properties defined in the observation's
-                parent sets such as location or equipment are inherited by this observation
-                unless the property is redefined within this observation.</xs:documentation>
+              <xs:documentation>Observations can be part of a set of observations, contained in an
+                observation-set element. Properties defined in the observation's parent sets such as
+                location or equipment are inherited by this observation unless the property is
+                redefined within this observation.</xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element name="observation-set" type="observationSetType">
@@ -195,6 +194,7 @@ TO DO
                 observation-set.</xs:documentation>
             </xs:annotation>
           </xs:element>
+          <!-- TODO: Should entry and entry-set be allowed as children of observation-set? Probably. -->
         </xs:choice>
       </xs:sequence>
     </xs:sequence>

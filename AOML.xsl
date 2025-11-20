@@ -51,18 +51,14 @@ TO DO:
 
 -->
 
-<xsl:stylesheet version="1.0"
-  xmlns="http://www.w3.org/1999/xhtml"
+<xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:aoml="https://www.pchapin.org/XML/AOML"
-  exclude-result-prefixes="xsi aoml">
-  
-  <xsl:output method="xml"
-    doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
-    doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
-    indent="yes"/>
-  
+  xmlns:aoml="https://www.pchapin.org/XML/AOML" exclude-result-prefixes="xsi aoml">
+
+  <xsl:output method="xml" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
+    doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" indent="yes"/>
+
   <xsl:template match="aoml:entry-set">
     <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
       <head>
@@ -84,9 +80,10 @@ TO DO:
 
 
   <xsl:template match="aoml:observation-set">
+    <!-- TODO: The language should come from the AOML document. -->
     <html lang="en-US">
       <head>
-        <!-- Probably eventually the title should come from the AOML document. -->
+        <!-- TODO: The title should come from the AOML document. -->
         <title>Observations</title>
         <link rel="stylesheet" href="default.css" type="text/css"/>
       </head>
@@ -101,7 +98,9 @@ TO DO:
 
         <!-- If this observation set applies to an object group, handle that. Note that the
              schema doesn't currently (2003-07-21) allow object groups to be children of
-             observation-set. This should probably be corrected eventually. -->
+             observation-set. This should probably be corrected eventually. Actually, as I look
+             at this (2025-11-20), I can see that not even object elements are allowed as
+             direct children of observation-set. I wonder what I/we was/were thinking. -->
         <xsl:if test="aoml:object-group">
           <xsl:apply-templates select="aoml:object-group"/>
         </xsl:if>
@@ -279,7 +278,7 @@ TO DO:
         </xsl:if>
 
         <!-- Now deal with formatting for the specific types. -->
-        <xsl:if test="@xsi:type='starMultipleObjectType'">
+        <xsl:if test="@xsi:type = 'starMultipleObjectType'">
           <tr>
             <td>Magnitudes</td>
             <td>
@@ -298,8 +297,7 @@ TO DO:
               <b>
                 <xsl:for-each select="aoml:separation">
                   <xsl:value-of select="@designation-1"/><xsl:value-of select="@designation-2"
-                    />=<span class="highlight"><xsl:value-of select="@distance"/>"<xsl:if
-                      test="@PA">
+                    />=<span class="highlight"><xsl:value-of select="@distance"/>"<xsl:if test="@PA">
                       <xsl:text> (</xsl:text>
                       <xsl:value-of select="@PA"/>
                       <xsl:text> degrees) </xsl:text>
@@ -333,7 +331,7 @@ TO DO:
   </xsl:template>
 
   <!-- The following template formats an absolute datetime. -->
-  <xsl:template match="aoml:datetime|aoml:start|aoml:end">
+  <xsl:template match="aoml:datetime | aoml:start | aoml:end">
     <xsl:value-of select="."/>
     <xsl:if test="@resolution"> &plusmn; <xsl:value-of select="substring(@resolution, 2)"/>
     </xsl:if>
@@ -349,7 +347,6 @@ TO DO:
   </xsl:template>
 
 </xsl:stylesheet>
-
 <!--
 
 After having a conversation with ChatGPT, it suggested the following approach. Here
